@@ -7,11 +7,12 @@ require_once '../vendor/autoload.php'; //NOS TRAE LOS PAQUETES INSTALADOS
 
 $app = AppFactory::create();
 
+$app->setBasePath('/lacomanda/app');
+
 $app->get('/', function (Request $request, Response $response, array $args) 
 {
     $response->getBody()->write("Funciona!");
     return $response;
 });
-
 
 $app->run();
