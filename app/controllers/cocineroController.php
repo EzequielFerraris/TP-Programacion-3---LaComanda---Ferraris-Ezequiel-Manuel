@@ -2,7 +2,6 @@
 require_once './models/Cocinero.php';
 require_once './interfaces/abm.php';
 
-
 class cocineroController extends Cocinero implements ABM
 {
     public function CargarUno($request, $response, $args)
@@ -12,13 +11,13 @@ class cocineroController extends Cocinero implements ABM
         $apellido = $parametros['apellido'];
         $nombre = $parametros['nombre'];
         $estado = "alta";
-        if(isset($parametros['fechaInicio']))
+        if(isset($parametros['fechaIngreso']))
         {
             $fecha = $parametros['fecha'];
         }
         else
         {
-            $fecha = new DateTime();
+            $fecha = (new DateTime())->format("Y-m-d");
         }
 
         // Creamos el cocinero
@@ -88,7 +87,7 @@ class cocineroController extends Cocinero implements ABM
         if(isset($request['apellido'])) {$trabajador->apellido = $request['apellido'];}
         if(isset($request['nombre'])) {$trabajador->nombre = $request['nombre'];}
         if(isset($request['estado'])) {$trabajador->estado = $request['estado'];}
-        if(isset($request['fechaInicio'])) {$trabajador->fechaInicio = $request['fechaInicio'];}
+        if(isset($request['fechaIngreso'])) {$trabajador->fechaIngreso = $request['fechaIngreso'];}
          
         $trabajador->update();
 

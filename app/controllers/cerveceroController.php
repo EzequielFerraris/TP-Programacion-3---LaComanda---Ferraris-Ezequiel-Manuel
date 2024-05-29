@@ -13,13 +13,13 @@ class cerveceroController extends Cervecero implements ABM
         $apellido = $parametros['apellido'];
         $nombre = $parametros['nombre'];
         $estado = "alta";
-        if(isset($parametros['fechaInicio']))
+        if(isset($parametros['fechaIngreso']))
         {
             $fecha = $parametros['fecha'];
         }
         else
         {
-            $fecha = new DateTime();
+            $fecha = (new DateTime())->format("Y-m-d");
         }
 
         // Creamos el cocinero
@@ -89,7 +89,7 @@ class cerveceroController extends Cervecero implements ABM
         if(isset($request['apellido'])) {$trabajador->apellido = $request['apellido'];}
         if(isset($request['nombre'])) {$trabajador->nombre = $request['nombre'];}
         if(isset($request['estado'])) {$trabajador->estado = $request['estado'];}
-        if(isset($request['fechaInicio'])) {$trabajador->fechaInicio = $request['fechaInicio'];}
+        if(isset($request['fechaIngreso'])) {$trabajador->fechaIngreso = $request['fechaIngreso'];}
          
         $trabajador->update();
 
