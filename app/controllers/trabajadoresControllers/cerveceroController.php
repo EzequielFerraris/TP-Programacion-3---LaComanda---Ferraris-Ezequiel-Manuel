@@ -1,9 +1,9 @@
 <?php
-require_once './models/Bartender.php';
+require_once './models/trabajadores/Cervecero.php';
 require_once './interfaces/abm.php';
 
 
-class bartenderController extends Bartender implements ABM
+class cerveceroController extends Cervecero implements ABM
 {
     
     public function CargarUno($request, $response, $args)
@@ -15,7 +15,7 @@ class bartenderController extends Bartender implements ABM
         $estado = "alta";
         if(isset($parametros['fechaIngreso']))
         {
-            $fecha = $parametros['fecha'];
+            $fecha = $parametros['fechaIngreso'];
         }
         else
         {
@@ -23,37 +23,37 @@ class bartenderController extends Bartender implements ABM
         }
 
         // Creamos el cocinero
-        $bartender = new Bartender();
-        $bartender->apellido = $apellido;
-        $bartender->nombre = $nombre;
-        $bartender->fechaIngreso = $fecha;
-        $bartender->estado = $estado;
-        $bartender->crear();
+        $cervecero = new Cervecero();
+        $cervecero->apellido = $apellido;
+        $cervecero->nombre = $nombre;
+        $cervecero->fechaIngreso = $fecha;
+        $cervecero->estado = $estado;
+        $cervecero->crear();
 
-        $payload = json_encode(array("mensaje" => "Bartender agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero agregado con exito"));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
- 
+    
 	public function TraerTodos($request, $response, $args)
     {
-        $lista = Bartender::obtenerTodos();
-        $payload = json_encode(array("listaBartenders" => $lista));
+        $lista = Cervecero::obtenerTodos();
+        $payload = json_encode(array("listaCerveceros" => $lista));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-  
+
 	public function TraerUno($request, $response, $args)
     {
-        
+        // Buscamos usuario por nombre y apellido
         $apellido = $args['apellido'];
         $nombre = $args['nombre'];
-        $bartender = Bartender::buscar($apellido, $nombre);
-        $payload = json_encode($bartender);
+        $cervecero = Cervecero::buscar($apellido, $nombre);
+        $payload = json_encode($cervecero);
 
         $response->getBody()->write($payload);
         return $response
@@ -66,11 +66,11 @@ class bartenderController extends Bartender implements ABM
 
         $id = $parametros['id'];
 
-        $trabajador = Bartender::buscarPorId($id);
+        $trabajador = Cervecero::buscarPorId($id);
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Bartender dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero dado de baja con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -84,7 +84,7 @@ class bartenderController extends Bartender implements ABM
 
         $id = $parametros['id'];
 
-        $trabajador = Bartender::buscarPorId($id);
+        $trabajador = Cervecero::buscarPorId($id);
 
         if(isset($request['apellido'])) {$trabajador->apellido = $request['apellido'];}
         if(isset($request['nombre'])) {$trabajador->nombre = $request['nombre'];}
@@ -93,7 +93,7 @@ class bartenderController extends Bartender implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Bartender modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero modificado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -107,14 +107,14 @@ class bartenderController extends Bartender implements ABM
 
         $id = $parametros['id'];
 
-        Bartender::hardDelete($id);
+        Cervecero::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Bartender eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero eliminado con exito"));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-    
+   
 }
 

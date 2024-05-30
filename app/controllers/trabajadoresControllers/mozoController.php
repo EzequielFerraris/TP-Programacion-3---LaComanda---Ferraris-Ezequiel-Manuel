@@ -1,5 +1,5 @@
 <?php
-require_once './models/Mozo.php';
+require_once './models/trabajadores/Mozo.php';
 require_once './interfaces/abm.php';
 
 
@@ -14,18 +14,18 @@ class mozoController extends Mozo implements ABM
         $estado = "alta";
         if(isset($parametros['fechaIngreso']))
         {
-            $fecha = $parametros['fecha'];
+            $fechaIngreso = $parametros['fechaIngreso'];
         }
         else
         {
-            $fecha = (new DateTime())->format("Y-m-d");
+            $fechaIngreso = (new DateTime())->format("Y-m-d");
         }
 
         // Creamos el cocinero
         $mozo = new Mozo();
         $mozo->apellido = $apellido;
         $mozo->nombre = $nombre;
-        $mozo->fechaIngreso = $fecha;
+        $mozo->fechaIngreso = $fechaIngreso;
         $mozo->estado = $estado;
         $mozo->crear();
 

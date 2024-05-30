@@ -1,17 +1,16 @@
-
 <?php
 
 include_once "Trabajador.php";
 include_once "./db/AccesoDatos.php";
 
-class Cervecero extends Trabajador
+class Bartender extends Trabajador
 {
 
     public function crear()
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO cerveceros 
-                                                        (apellido, nombre, estado, fecha) 
+        $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO bartenders 
+                                                        (apellido, nombre, estado, fechaIngreso) 
                                                         VALUES (:apellido, :nombre, :estado, :fechaIngreso)");
         $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -19,35 +18,35 @@ class Cervecero extends Trabajador
         $consulta->bindValue(':fechaIngreso', $this->fechaIngreso, PDO::PARAM_STR);
         $consulta->execute();
 
-        return $objAccesoDatos->obtenerUltimoId();
+        return $objAccesoDatos->RetornarUltimoIdInsertado();
     }
 
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM cerveceros");
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM bartenders");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Cervecero');
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Bartender');
     }
 
     public static function buscar($apellido, $nombre)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM cerveceros 
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM bartenders 
                                                         WHERE apellido = :apellido 
                                                         AND nombre = :nombre");
         $consulta->bindValue(':apellido', $apellido, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
         $consulta->execute();
 
-        return $consulta->fetchObject('Cervecero');
+        return $consulta->fetchObject('Bartender');
     }
 
     public static function buscarPorId($id)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM cerveceros 
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM bartenders 
                                                         WHERE id = :id");
 
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);;
@@ -59,7 +58,7 @@ class Cervecero extends Trabajador
     public function update()
     {
         $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("UPDATE cerveceros SET apellido = :apellido, 
+        $consulta = $objAccesoDato->RetornarConsulta("UPDATE bartenders SET apellido = :apellido, 
                                                         nombre = :nombre, estado = :estado, 
                                                         fechaIngreso = :fechaIngreso WHERE id = :id");
         $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
@@ -69,17 +68,17 @@ class Cervecero extends Trabajador
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
     }
-    
+
     public static function hardDelete($id)
     {
-        $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM cerveceros WHERE id = :id");
+        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM bartenders WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
                 
         $consulta->execute();
     }
-}
 
+}
 
 
 ?>

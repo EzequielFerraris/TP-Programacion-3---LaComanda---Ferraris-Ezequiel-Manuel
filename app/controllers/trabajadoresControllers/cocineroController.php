@@ -1,11 +1,9 @@
 <?php
-require_once './models/Cervecero.php';
+require_once './models/trabajadores/Cocinero.php';
 require_once './interfaces/abm.php';
 
-
-class cerveceroController extends Cervecero implements ABM
+class cocineroController extends Cocinero implements ABM
 {
-    
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -15,7 +13,7 @@ class cerveceroController extends Cervecero implements ABM
         $estado = "alta";
         if(isset($parametros['fechaIngreso']))
         {
-            $fecha = $parametros['fecha'];
+            $fecha = $parametros['fechaIngreso'];
         }
         else
         {
@@ -23,24 +21,24 @@ class cerveceroController extends Cervecero implements ABM
         }
 
         // Creamos el cocinero
-        $cervecero = new Cervecero();
-        $cervecero->apellido = $apellido;
-        $cervecero->nombre = $nombre;
-        $cervecero->fechaIngreso = $fecha;
-        $cervecero->estado = $estado;
-        $cervecero->crear();
+        $cocinero = new Cocinero();
+        $cocinero->apellido = $apellido;
+        $cocinero->nombre = $nombre;
+        $cocinero->fechaIngreso = $fecha;
+        $cocinero->estado = $estado;
+        $cocinero->crear();
 
-        $payload = json_encode(array("mensaje" => "Cervecero agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero agregado con exito"));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-    
+
 	public function TraerTodos($request, $response, $args)
     {
-        $lista = Cervecero::obtenerTodos();
-        $payload = json_encode(array("listaCerveceros" => $lista));
+        $lista = Cocinero::obtenerTodos();
+        $payload = json_encode(array("listaCocineros" => $lista));
 
         $response->getBody()->write($payload);
         return $response
@@ -52,8 +50,8 @@ class cerveceroController extends Cervecero implements ABM
         // Buscamos usuario por nombre y apellido
         $apellido = $args['apellido'];
         $nombre = $args['nombre'];
-        $cervecero = Cervecero::buscar($apellido, $nombre);
-        $payload = json_encode($cervecero);
+        $cocinero = Cocinero::buscar($apellido, $nombre);
+        $payload = json_encode($cocinero);
 
         $response->getBody()->write($payload);
         return $response
@@ -66,11 +64,11 @@ class cerveceroController extends Cervecero implements ABM
 
         $id = $parametros['id'];
 
-        $trabajador = Cervecero::buscarPorId($id);
+        $trabajador = Cocinero::buscarPorId($id);
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cervecero dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero dado de baja con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -84,7 +82,7 @@ class cerveceroController extends Cervecero implements ABM
 
         $id = $parametros['id'];
 
-        $trabajador = Cervecero::buscarPorId($id);
+        $trabajador = Cocinero::buscarPorId($id);
 
         if(isset($request['apellido'])) {$trabajador->apellido = $request['apellido'];}
         if(isset($request['nombre'])) {$trabajador->nombre = $request['nombre'];}
@@ -93,7 +91,7 @@ class cerveceroController extends Cervecero implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cervecero modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero modificado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -107,14 +105,14 @@ class cerveceroController extends Cervecero implements ABM
 
         $id = $parametros['id'];
 
-        Cervecero::hardDelete($id);
+        Cocinero::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Cervecero eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero eliminado con exito"));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-   
 }
+
 

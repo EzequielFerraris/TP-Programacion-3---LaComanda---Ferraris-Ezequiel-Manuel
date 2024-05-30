@@ -9,7 +9,7 @@ class Mozo extends Trabajador
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO mozos 
-                                                        (apellido, nombre, estado, fecha) 
+                                                        (apellido, nombre, estado, fechaIngreso) 
                                                         VALUES (:apellido, :nombre, :estado, :fechaIngreso)");
         $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -17,7 +17,7 @@ class Mozo extends Trabajador
         $consulta->bindValue(':fechaIngreso', $this->fechaIngreso, PDO::PARAM_STR);
         $consulta->execute();
 
-        return $objAccesoDatos->obtenerUltimoId();
+        return $objAccesoDatos->RetornarUltimoIdInsertado();
     }
 
     public static function obtenerTodos()
