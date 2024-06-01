@@ -12,6 +12,7 @@ require_once './controllers/trabajadoresControllers/cerveceroController.php';
 require_once './controllers/productosControllers/productosController.php';
 require_once './controllers/mesasControllers/mesasController.php';
 require_once './controllers/sociosControllers/socioController.php';
+require_once './controllers/pedidosControllers/pedidosController.php';
 
 $app = AppFactory::create();
 
@@ -23,6 +24,13 @@ $app->get('/', function (Request $request, Response $response, array $args)
 {
     $response->getBody()->write("Bienvenido a nuestra APP!");
     return $response;
+});
+
+$app->group('/socios', function (RouteCollectorProxy $group) 
+{
+    $group->get('[/]', \socioController::class . ':TraerTodos');
+    $group->post('[/]', \socioController::class . ':CargarUno');
+
 });
 
 $app->group('/trabajadores', function (RouteCollectorProxy $group) 
@@ -44,7 +52,7 @@ $app->group('/trabajadores', function (RouteCollectorProxy $group)
     $group->post('/abm/mozos', \mozoController::class . ':CargarUno');
 });
 
-$app->group('/productos/abm', function (RouteCollectorProxy $group) 
+$app->group('/productos', function (RouteCollectorProxy $group) 
 {
     $group->get('[/]', \ProductosController::class . ':TraerTodos');
     $group->get('/{sector}', \ProductosController::class . ':TraerProductosPorSector');    
@@ -52,18 +60,16 @@ $app->group('/productos/abm', function (RouteCollectorProxy $group)
 
 });
 
-$app->group('/mesas/abm', function (RouteCollectorProxy $group) 
+$app->group('/mesas', function (RouteCollectorProxy $group) 
 {
     $group->get('[/]', \MesasController::class . ':TraerTodas');
     $group->post('[/]', \MesasController::class . ':CargarUna');
-
 });
 
-$app->group('/socios', function (RouteCollectorProxy $group) 
+$app->group('/pedidos', function (RouteCollectorProxy $group) 
 {
-    $group->get('[/]', \socioController::class . ':TraerTodos');
-    $group->post('[/]', \socioController::class . ':CargarUno');
-
+    $group->get('[/]', \PedidosController::class . ':TraerTodos');
+    $group->post('/cargar', \PedidosController::class . ':CargarUno');
 });
 
 $app->run();
