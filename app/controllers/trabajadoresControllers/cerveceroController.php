@@ -30,7 +30,7 @@ class cerveceroController extends Cervecero implements ABM
         $cervecero->estado = $estado;
         $cervecero->crear();
 
-        $payload = json_encode(array("mensaje" => "Cervecero agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero agregado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -70,7 +70,7 @@ class cerveceroController extends Cervecero implements ABM
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cervecero dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero dado de baja con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -93,7 +93,7 @@ class cerveceroController extends Cervecero implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cervecero modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero modificado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -109,7 +109,7 @@ class cerveceroController extends Cervecero implements ABM
 
         Cervecero::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Cervecero eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Cervecero eliminado con éxito"));
 
         $response->getBody()->write($payload);
         return $response

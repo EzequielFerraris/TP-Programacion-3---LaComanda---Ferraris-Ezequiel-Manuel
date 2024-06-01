@@ -30,7 +30,7 @@ class bartenderController extends Bartender implements ABM
         $bartender->estado = $estado;
         $bartender->crear();
 
-        $payload = json_encode(array("mensaje" => "Bartender agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Bartender agregado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -70,7 +70,7 @@ class bartenderController extends Bartender implements ABM
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Bartender dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Bartender dado de baja con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -93,7 +93,7 @@ class bartenderController extends Bartender implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Bartender modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Bartender modificado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -109,7 +109,7 @@ class bartenderController extends Bartender implements ABM
 
         Bartender::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Bartender eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Bartender eliminado con éxito"));
 
         $response->getBody()->write($payload);
         return $response

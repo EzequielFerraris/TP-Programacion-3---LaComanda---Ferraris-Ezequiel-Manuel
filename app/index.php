@@ -9,7 +9,9 @@ require_once './controllers/trabajadoresControllers/bartenderController.php';
 require_once './controllers/trabajadoresControllers/mozoController.php';
 require_once './controllers/trabajadoresControllers/cocineroController.php';
 require_once './controllers/trabajadoresControllers/cerveceroController.php';
-
+require_once './controllers/productosControllers/productosController.php';
+require_once './controllers/mesasControllers/mesasController.php';
+require_once './controllers/sociosControllers/socioController.php';
 
 $app = AppFactory::create();
 
@@ -23,24 +25,45 @@ $app->get('/', function (Request $request, Response $response, array $args)
     return $response;
 });
 
-$app->group('/abm', function (RouteCollectorProxy $group) 
+$app->group('/trabajadores', function (RouteCollectorProxy $group) 
 {
     //BARTENDERS
-    $group->get('/bartenders', \bartenderController::class . ':TraerTodos');
-    $group->post('/bartenders', \bartenderController::class . ':CargarUno');
+    $group->get('/abm/bartenders', \bartenderController::class . ':TraerTodos');
+    $group->post('/abm/bartenders', \bartenderController::class . ':CargarUno');
     
     //COCINEROS
-    $group->get('/cocineros', \cocineroController::class . ':TraerTodos');
+    $group->get('/abm/cocineros', \cocineroController::class . ':TraerTodos');
     $group->post('/cocineros', \cocineroController::class . ':CargarUno');
 
     //CERVECEROS
-    $group->get('/ceverceros', \cerveceroController::class . ':TraerTodos');
-    $group->post('/ceverceros', \cerveceroController::class . ':CargarUno');
+    $group->get('/abm/ceverceros', \cerveceroController::class . ':TraerTodos');
+    $group->post('/abm/ceverceros', \cerveceroController::class . ':CargarUno');
 
     //MOZOS
-    $group->get('/mozos', \mozoController::class . ':TraerTodos');
-    $group->post('/mozos', \mozoController::class . ':CargarUno');
+    $group->get('/abm/mozos', \mozoController::class . ':TraerTodos');
+    $group->post('/abm/mozos', \mozoController::class . ':CargarUno');
 });
 
+$app->group('/productos/abm', function (RouteCollectorProxy $group) 
+{
+    $group->get('[/]', \ProductosController::class . ':TraerTodos');
+    $group->get('/{sector}', \ProductosController::class . ':TraerProductosPorSector');    
+    $group->post('/', \ProductosController::class . ':CargarUno');
+
+});
+
+$app->group('/mesas/abm', function (RouteCollectorProxy $group) 
+{
+    $group->get('[/]', \MesasController::class . ':TraerTodas');
+    $group->post('[/]', \MesasController::class . ':CargarUna');
+
+});
+
+$app->group('/socios', function (RouteCollectorProxy $group) 
+{
+    $group->get('[/]', \socioController::class . ':TraerTodos');
+    $group->post('[/]', \socioController::class . ':CargarUno');
+
+});
 
 $app->run();

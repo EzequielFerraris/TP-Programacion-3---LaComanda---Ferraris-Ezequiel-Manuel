@@ -51,7 +51,7 @@ class Mozo extends Trabajador
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);;
         $consulta->execute();
 
-        return $consulta->fetchObject('Cocinero');
+        return $consulta->fetchObject('Mozo');
     }
 
     public function update()

@@ -28,7 +28,7 @@ class cocineroController extends Cocinero implements ABM
         $cocinero->estado = $estado;
         $cocinero->crear();
 
-        $payload = json_encode(array("mensaje" => "Cocinero agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero agregado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -68,7 +68,7 @@ class cocineroController extends Cocinero implements ABM
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cocinero dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero dado de baja con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -91,7 +91,7 @@ class cocineroController extends Cocinero implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Cocinero modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero modificado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -107,7 +107,7 @@ class cocineroController extends Cocinero implements ABM
 
         Cocinero::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Cocinero eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Cocinero eliminado con éxito"));
 
         $response->getBody()->write($payload);
         return $response

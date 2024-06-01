@@ -53,7 +53,7 @@ class Cervecero extends Trabajador
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);;
         $consulta->execute();
 
-        return $consulta->fetchObject('Cocinero');
+        return $consulta->fetchObject('Cervecero');
     }
 
     public function update()

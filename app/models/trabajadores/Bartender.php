@@ -1,7 +1,7 @@
 <?php
 
 include_once "Trabajador.php";
-include_once "./db/AccesoDatos.php";
+    include_once "./db/AccesoDatos.php";
 
 class Bartender extends Trabajador
 {
@@ -52,7 +52,7 @@ class Bartender extends Trabajador
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);;
         $consulta->execute();
 
-        return $consulta->fetchObject('Cocinero');
+        return $consulta->fetchObject('Bartender');
     }
 
     public function update()

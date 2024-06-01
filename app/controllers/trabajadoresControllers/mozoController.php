@@ -29,7 +29,7 @@ class mozoController extends Mozo implements ABM
         $mozo->estado = $estado;
         $mozo->crear();
 
-        $payload = json_encode(array("mensaje" => "Mozo agregado con exito"));
+        $payload = json_encode(array("mensaje" => "Mozo agregado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -69,7 +69,7 @@ class mozoController extends Mozo implements ABM
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Mozo dado de baja con exito"));
+        $payload = json_encode(array("mensaje" => "Mozo dado de baja con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -92,7 +92,7 @@ class mozoController extends Mozo implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Mozo modificado con exito"));
+        $payload = json_encode(array("mensaje" => "Mozo modificado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -108,7 +108,7 @@ class mozoController extends Mozo implements ABM
 
         Mozo::hardDelete($id);
 
-        $payload = json_encode(array("mensaje" => "Mozo eliminado con exito"));
+        $payload = json_encode(array("mensaje" => "Mozo eliminado con éxito"));
 
         $response->getBody()->write($payload);
         return $response
