@@ -15,11 +15,12 @@ class Pedido
     public function crear()
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO pedidos 
-                                                        (codigo, cliente, idMozo, mesa, estado, monto, fechaAlta, 
-                                                        tiempoEstimado, tiempoFinal) 
-                                                        VALUES (:codigo, :cliente, :idMozo, :mesa, :estado, :monto,
-                                                        :fechaAlta, :tiempoEstimado, :tiempoFinal");
+        $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO pedidos (codigo, cliente, idMozo, 
+                                                        mesa, estado, monto, fechaAlta, tiempoEstimado, 
+                                                        tiempoFinal) 
+                                                        VALUES (:codigo, :cliente, :idMozo, :mesa, :estado, 
+                                                        :monto, :fechaAlta, :tiempoEstimado, :tiempoFinal)");
+        
         $consulta->bindValue(':codigo', $this->codigo, PDO::PARAM_STR);
         $consulta->bindValue(':cliente', $this->cliente, PDO::PARAM_STR);
         $consulta->bindValue(':idMozo', $this->idMozo, PDO::PARAM_INT);
@@ -31,6 +32,7 @@ class Pedido
         $consulta->bindValue(':tiempoFinal', $this->tiempoFinal, PDO::PARAM_INT);
         $consulta->execute();
 
+        return $objAccesoDatos->RetornarUltimoIdInsertado();
     }
 
     public static function obtenerTodos()

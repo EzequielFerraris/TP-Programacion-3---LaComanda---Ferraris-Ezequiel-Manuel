@@ -1,7 +1,7 @@
 <?php
 
 require_once './models/pedidos/pedido.php';
-class PedidosController
+class PedidosController extends Pedido
 {
     public function CargarUno($request, $response, $args)
     {
