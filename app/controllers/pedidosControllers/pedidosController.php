@@ -1,7 +1,8 @@
 <?php
 
 require_once './models/pedidos/pedido.php';
-class PedidosController extends Pedido
+require_once './interfaces/abm.php';
+class PedidosController extends Pedido implements ABM
 {
     public function CargarUno($request, $response, $args)
     {
@@ -19,6 +20,7 @@ class PedidosController extends Pedido
 
         // Creamos el pedido
         $instancia = new Pedido();  
+
         $instancia->codigo = $codigo;    
         $instancia->cliente = $cliente;
         $instancia->idMozo = $idMozo;
@@ -28,6 +30,7 @@ class PedidosController extends Pedido
         $instancia->fechaAlta = $fechaAlta;
         $instancia->tiempoEstimado = $tiempoEstimado;
         $instancia->tiempoFinal = $tiempoFinal;
+        
         $instancia->crear();
 
         $payload = json_encode(array("mensaje" => "Pedido agregado con éxito"));

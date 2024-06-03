@@ -62,8 +62,8 @@ $app->group('/productos', function (RouteCollectorProxy $group)
 
 $app->group('/mesas', function (RouteCollectorProxy $group) 
 {
-    $group->get('[/]', \MesasController::class . ':TraerTodas');
-    $group->post('[/]', \MesasController::class . ':CargarUna');
+    $group->get('[/]', \MesasController::class . ':TraerTodos');
+    $group->post('[/]', \MesasController::class . ':CargarUno');
 });
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) 

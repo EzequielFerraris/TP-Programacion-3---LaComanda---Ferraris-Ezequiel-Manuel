@@ -1,10 +1,11 @@
 <?php
 
 require_once './models/mesas/mesa.php';
+require_once './interfaces/abm.php';
 
-class MesasController extends Mesa
+class MesasController extends Mesa implements ABM
 {
-    public function CargarUna($request, $response, $args)
+    public function cargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
@@ -24,7 +25,7 @@ class MesasController extends Mesa
           ->withHeader('Content-Type', 'application/json');
     }
     
-	public function TraerTodas($request, $response, $args)
+	public function TraerTodos($request, $response, $args)
     {
         $lista = Mesa::obtenerTodas();
         $payload = json_encode(array("listaMesas" => $lista));
@@ -34,7 +35,7 @@ class MesasController extends Mesa
           ->withHeader('Content-Type', 'application/json');
     }
 
-	public function TraerUna($request, $response, $args)
+	public function TraerUno($request, $response, $args)
     {
         $codigo = $args['codigo'];
         
@@ -46,7 +47,7 @@ class MesasController extends Mesa
           ->withHeader('Content-Type', 'application/json');
     }
     
-	public function ModificarUna($request, $response, $args)
+	public function ModificarUno($request, $response, $args)
     {
         
         $parametros = $request->getParsedBody();
@@ -66,7 +67,7 @@ class MesasController extends Mesa
           ->withHeader('Content-Type', 'application/json');
     }
 
-    public function DarBajaUna($request, $response, $args)
+    public function DarBajaUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
@@ -84,7 +85,7 @@ class MesasController extends Mesa
           ->withHeader('Content-Type', 'application/json');
     }
 
-    public function HardDeleteUna($request, $response, $args)
+    public function HardDeleteUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 

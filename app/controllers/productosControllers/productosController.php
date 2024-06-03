@@ -2,7 +2,8 @@
 
 require_once './models/productos/producto.php';
 require_once './interfaces/abm.php';
-class ProductosController extends Producto
+
+class ProductosController extends Producto implements ABM
 {
     public function CargarUno($request, $response, $args)
     {
