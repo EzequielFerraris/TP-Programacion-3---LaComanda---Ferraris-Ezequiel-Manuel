@@ -8,9 +8,9 @@ class Socio
     public string $mail;
     private string $clave;
 
-    public function __construct() 
+    public function __invoke() 
     {
-        $this->clave = password_hash($this->clave, PASSWORD_DEFAULT);
+        $this->encriptar();
     }
 
     public function login(string $pass) : bool
@@ -20,9 +20,20 @@ class Socio
         return $result;
     }
 
+    public function setPassword($clave)
+    {
+        $this->clave = $clave;
+    }
+
+    public function getPassword()
+    {
+        return $this->clave;
+    }
+
     public function encriptar()
     {
-        $this->clave = password_hash($this->clave, PASSWORD_DEFAULT);
+        $nueva = password_hash($this->getPassword(), PASSWORD_DEFAULT);
+        $this->clave = $nueva;
     }
 
     public function crear()

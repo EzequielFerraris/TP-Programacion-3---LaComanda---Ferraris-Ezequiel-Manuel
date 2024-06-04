@@ -18,7 +18,7 @@ class SocioController
         $instancia->apellido = $apellido;
         $instancia->nombre = $nombre;
         $instancia->mail = $mail;
-        $instancia->clave = $clave;
+        $instancia->setPassword($clave);
         $instancia->encriptar();
         $instancia->crear();
 

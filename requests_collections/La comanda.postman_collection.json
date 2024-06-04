@@ -125,14 +125,15 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/pedidos",
+					"raw": "localhost/lacomanda/app/pedidos/listar",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"pedidos"
+						"pedidos",
+						"listar"
 					],
 					"query": [
 						{
@@ -264,7 +265,7 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/bartenders",
+					"raw": "localhost/lacomanda/app/trabajadores/listar",
 					"host": [
 						"localhost"
 					],
@@ -272,334 +273,7 @@
 						"lacomanda",
 						"app",
 						"trabajadores",
-						"abm",
-						"bartenders"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cerveceros",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Julián",
-							"type": "text"
-						},
-						{
-							"key": "nombre",
-							"value": "Fonzi",
-							"type": "text"
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/cerveceros",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"trabajadores",
-						"abm",
-						"cerveceros"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/cocineros",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"trabajadores",
-						"abm",
-						"cocineros"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/mozos",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"trabajadores",
-						"abm",
-						"mozos"
+						"listar"
 					],
 					"query": [
 						{
@@ -731,14 +405,15 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/socios",
+					"raw": "localhost/lacomanda/app/socios/listar",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"socios"
+						"socios",
+						"listar"
 					],
 					"query": [
 						{
@@ -974,7 +649,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
+			"name": "localhost/lacomanda/app/trabajadores/cargar",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -983,23 +658,28 @@
 					"urlencoded": [
 						{
 							"key": "apellido",
-							"value": "Smith",
+							"value": "Fernandez",
 							"type": "text"
 						},
 						{
 							"key": "nombre",
-							"value": "Joseph",
+							"value": "Facundo",
 							"type": "text"
 						},
 						{
 							"key": "fechaIngreso",
-							"value": "2024-5-20",
+							"value": "2024-1-18",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "cocinero",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/mozos",
+					"raw": "localhost/lacomanda/app/trabajadores/cargar",
 					"host": [
 						"localhost"
 					],
@@ -1007,56 +687,14 @@
 						"lacomanda",
 						"app",
 						"trabajadores",
-						"abm",
-						"mozos"
+						"cargar"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Smithers",
-							"type": "text"
-						},
-						{
-							"key": "nombre",
-							"value": "Joseph",
-							"type": "text"
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-5-22",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/abm/cocineros",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"trabajadores",
-						"abm",
-						"cocineros"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
+			"name": "localhost/lacomanda/app/mesas/cargar",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -1065,7 +703,7 @@
 					"urlencoded": [
 						{
 							"key": "codigo",
-							"value": "56poi",
+							"value": "56pos",
 							"type": "text"
 						},
 						{
@@ -1076,21 +714,22 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/mesas",
+					"raw": "localhost/lacomanda/app/mesas/cargar",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"mesas"
+						"mesas",
+						"cargar"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/cocineros",
+			"name": "localhost/lacomanda/app/socios/cargar",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -1098,36 +737,36 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
+							"key": "apellido",
+							"value": "Socio2",
+							"type": "text"
+						},
+						{
 							"key": "nombre",
-							"value": "Papas con Panceta",
+							"value": "Socio2",
 							"type": "text"
 						},
 						{
-							"key": "precio",
-							"value": "5000",
+							"key": "mail",
+							"value": "socio2@gmail.com",
 							"type": "text"
 						},
 						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text"
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
+							"key": "clave",
+							"value": "123456",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/productos/cargar",
+					"raw": "localhost/lacomanda/app/socios/cargar",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"productos",
+						"socios",
 						"cargar"
 					]
 				}
