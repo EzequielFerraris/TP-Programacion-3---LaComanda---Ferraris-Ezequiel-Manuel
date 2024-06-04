@@ -72,7 +72,7 @@ class Cervecero extends Trabajador
     
     public static function hardDelete($id)
     {
-        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM cerveceros WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
                 

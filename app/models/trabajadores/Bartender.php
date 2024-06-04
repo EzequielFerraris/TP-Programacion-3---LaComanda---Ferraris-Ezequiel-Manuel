@@ -1,7 +1,7 @@
 <?php
 
 include_once "Trabajador.php";
-    include_once "./db/AccesoDatos.php";
+include_once "./db/AccesoDatos.php";
 
 class Bartender extends Trabajador
 {

@@ -35,17 +35,18 @@ $app->group('/socios', function (RouteCollectorProxy $group)
 
 $app->group('/trabajadores', function (RouteCollectorProxy $group) 
 {
+    
     //BARTENDERS
     $group->get('/abm/bartenders', \bartenderController::class . ':TraerTodos');
     $group->post('/abm/bartenders', \bartenderController::class . ':CargarUno');
     
     //COCINEROS
     $group->get('/abm/cocineros', \cocineroController::class . ':TraerTodos');
-    $group->post('/cocineros', \cocineroController::class . ':CargarUno');
+    $group->post('/abm/cocineros', \cocineroController::class . ':CargarUno');
 
     //CERVECEROS
-    $group->get('/abm/ceverceros', \cerveceroController::class . ':TraerTodos');
-    $group->post('/abm/ceverceros', \cerveceroController::class . ':CargarUno');
+    $group->get('/abm/cerveceros', \cerveceroController::class . ':TraerTodos');
+    $group->post('/abm/cerveceros', \cerveceroController::class . ':CargarUno');
 
     //MOZOS
     $group->get('/abm/mozos', \mozoController::class . ':TraerTodos');
@@ -56,7 +57,7 @@ $app->group('/productos', function (RouteCollectorProxy $group)
 {
     $group->get('[/]', \ProductosController::class . ':TraerTodos');
     $group->get('/{sector}', \ProductosController::class . ':TraerProductosPorSector');    
-    $group->post('/', \ProductosController::class . ':CargarUno');
+    $group->post('/cargar', \ProductosController::class . ':CargarUno');
 
 });
 
