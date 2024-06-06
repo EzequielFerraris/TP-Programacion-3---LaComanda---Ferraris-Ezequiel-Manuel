@@ -2,7 +2,7 @@
 include_once "./db/AccesoDatos.php";
 class Mesa
 {
-
+    public int $id;
     public string $codigo;
     public string $estado;
     
@@ -39,23 +39,26 @@ class Mesa
         return $consulta->fetchObject('Mesa');
     }
 
+    public static function buscarPorId($id)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM mesas 
+                                                        WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Mesa');
+    }
     public function update()
     {
         $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objAccesoDato->RetornarConsulta("UPDATE mesas SET estado = :estado,
-                                                    WHERE codigo = :codigo");
+                                                    WHERE id = :id");
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);                                               
         $consulta->bindValue(':codigo', $this->codigo, PDO::PARAM_STR);
         $consulta->bindValue(':estado', strval($this->estado), PDO::PARAM_STR);
         $consulta->execute();
     }
 
-    public static function hardDelete($codigo)
-    {
-        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM mesas WHERE codigo = :codigo");
-        $consulta->bindValue(':codigo', $codigo, PDO::PARAM_STR);
-                
-        $consulta->execute();
-    }
 }
 ?>

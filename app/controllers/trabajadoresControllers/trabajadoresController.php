@@ -6,6 +6,22 @@ require_once './interfaces/abm.php';
 class trabajadoresController extends Trabajador implements ABM
 {
     
+    public static function ChequearUnoPorID($id, $puesto) : bool
+    {
+        $resultado = false;
+        try
+        {
+            $trabajador = Trabajador::buscarPorId($id);
+        
+            if($trabajador instanceof Trabajador && $trabajador->puesto == $puesto)
+            {
+                $resultado = true;
+            }
+        }
+        catch(Exception $e){}
+        return $resultado;
+    }
+
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -14,23 +30,20 @@ class trabajadoresController extends Trabajador implements ABM
         $nombre = $parametros['nombre'];
         $puesto = $parametros['puesto'];
         $estado = "alta";
-        
-        if(isset($parametros['fechaIngreso']))
-        {
-            $fechaIngreso = $parametros['fechaIngreso'];
-        }
-        else
-        {
-            $fechaIngreso = (new DateTime())->format("Y-m-d");
-        }
+        $clave = $parametros['clave'];
+        $fechaIngreso = $parametros['fechaIngreso'];
+        $mail = $parametros['mail'];
 
-        // Creamos el cocinero
+        // Creamos el trabajador
         $trabajador = new Trabajador();
         $trabajador->apellido = $apellido;
         $trabajador->nombre = $nombre;
         $trabajador->fechaIngreso = $fechaIngreso;
         $trabajador->estado = $estado;
         $trabajador->puesto = $puesto;
+        $trabajador->mail = $mail;
+        $trabajador->setPassword($clave);
+        $trabajador->encriptar();
         $trabajador->crear();
 
         $payload = json_encode(array("mensaje" => "Trabajador agregado con éxito"));
@@ -63,6 +76,7 @@ class trabajadoresController extends Trabajador implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
+    
 	public function DarBajaUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -82,7 +96,6 @@ class trabajadoresController extends Trabajador implements ABM
 
 	public function ModificarUno($request, $response, $args)
     {
-        
         $parametros = $request->getParsedBody();
 
         $id = $parametros['id'];
@@ -102,8 +115,11 @@ class trabajadoresController extends Trabajador implements ABM
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
-          
     }
-   
+    
+    public static function buscarPorMail($mail)
+    {
+        return Trabajador::buscarPorMail($mail);
+    }
 }
 

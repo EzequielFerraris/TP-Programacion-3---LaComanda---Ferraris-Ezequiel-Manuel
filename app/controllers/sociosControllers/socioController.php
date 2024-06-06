@@ -40,7 +40,10 @@ class SocioController
           ->withHeader('Content-Type', 'application/json');
     }
   
-
+    public static function buscarPorMail($mail)
+    {
+        return Socio::buscarPorMail($mail);
+    }
 
 }
 

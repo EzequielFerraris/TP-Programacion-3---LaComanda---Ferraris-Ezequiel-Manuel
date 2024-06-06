@@ -8,11 +8,6 @@ class Socio
     public string $mail;
     private string $clave;
 
-    public function __invoke() 
-    {
-        $this->encriptar();
-    }
-
     public function login(string $pass) : bool
     {
         $hash = $this->clave;
@@ -68,6 +63,17 @@ class Socio
                                                         AND nombre = :nombre");
         $consulta->bindValue(':apellido', $apellido, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Socio');
+    }
+
+    public static function buscarPorMail($mail)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM socios 
+                                                        WHERE mail = :mail");
+        $consulta->bindValue(':mail', $mail, PDO::PARAM_STR);
         $consulta->execute();
 
         return $consulta->fetchObject('Socio');

@@ -5,6 +5,23 @@ require_once './interfaces/abm.php';
 
 class MesasController extends Mesa implements ABM
 {
+
+    public static function CheckMesa($codigo) : bool
+    {
+        $resultado = false;
+        try
+        {
+            $mesa = Mesa::buscar($codigo);
+        
+            if($mesa instanceof Mesa)
+            {
+                $resultado = true;
+            }
+        }
+        catch(Exception $e){}
+
+        return $resultado;
+    }
     public function cargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -35,7 +52,7 @@ class MesasController extends Mesa implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
-	public function TraerUno($request, $response, $args)
+	public function TraerUno($request, $response, $args) : Mesa
     {
         $codigo = $args['codigo'];
         
@@ -67,6 +84,27 @@ class MesasController extends Mesa implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public function ModificarPorID($request, $response, $args)
+    {
+        
+        $parametros = $request->getParsedBody();
+
+        $id = $parametros['id'];
+
+        $instancia = Mesa::buscarPorId($id);
+
+        if(isset($request['codigo'])) {$instancia->estado = $request['codigo'];}
+        if(isset($request['estado'])) {$instancia->estado = $request['estado'];}
+                 
+        $instancia->update();
+
+        $payload = json_encode(array("mensaje" => "Mesa modificada con exito"));
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
     public function DarBajaUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -79,21 +117,6 @@ class MesasController extends Mesa implements ABM
         $instancia->update();
 
         $payload = json_encode(array("mensaje" => "Mesa dada de baja con éxito"));
-
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
-
-    public function HardDeleteUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
-
-        $codigo = $parametros['codigo'];
-
-        Mesa::hardDelete($codigo);
-
-        $payload = json_encode(array("mensaje" => "Mesa eliminada con exito"));
 
         $response->getBody()->write($payload);
         return $response
