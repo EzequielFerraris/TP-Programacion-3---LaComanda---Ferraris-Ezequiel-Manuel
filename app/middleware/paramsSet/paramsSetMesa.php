@@ -9,7 +9,7 @@ class ParamsSetMesa
     public function __invoke(Request $request, RequestHandler $handler): Response
     {   
         $parametros = $request->getParsedBody();
-
+        
         if(isset($parametros['codigo']) && isset($parametros['estado'])) 
         {
             $response = $handler->handle($request);

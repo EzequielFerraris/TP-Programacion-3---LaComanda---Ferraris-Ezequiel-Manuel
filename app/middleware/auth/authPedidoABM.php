@@ -18,11 +18,7 @@ class AuthPedidoABM
         $idMozo = $parametros['idMozo'];
         $mesa = $parametros['mesa'];
         $estado = $parametros['estado'];
-        $monto = $parametros['monto'];
-        $fechaAlta = $parametros['fechaAlta'];
-        $tiempoEstimado = $parametros['tiempoEstimado'];
-        $tiempoFinal = $parametros['tiempoFinal'];
-
+        
         $valido = false;
         $parametroInvalido = "";
 
@@ -38,36 +34,8 @@ class AuthPedidoABM
                     {
                         if(Validaciones::es_letras($estado))
                         {
-                            if(Validaciones::es_float_positivo($monto))
-                            {
-                                if(Validaciones::puede_ser_date($fechaAlta))
-                                {
-                                    if(Validaciones::int_positivo($tiempoEstimado))
-                                    {
-                                        if(Validaciones::es_int($tiempoFinal))
-                                        {
-                                            $valido = true;
-                                            $response = $handler->handle($request);
-                                        }
-                                        else
-                                        {
-                                            $parametroInvalido = "tiempoFinal";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        $parametroInvalido = "tiempoEstimado";
-                                    }
-                                }
-                                else
-                                {
-                                    $parametroInvalido = "fechaAlta";
-                                }
-                            }
-                            else
-                            {
-                                $parametroInvalido = "monto";
-                            }
+                            $valido = true;
+                            $response = $handler->handle($request);
                         }
                         else
                         {

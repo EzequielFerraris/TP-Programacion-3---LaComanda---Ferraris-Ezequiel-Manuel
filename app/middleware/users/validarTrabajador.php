@@ -21,9 +21,9 @@ class ValidarTrabajador
     {   
         $parametros = $request->getParsedBody();
         
-        if(isset($parametros["mail"]) && isset($parametros["passTrabajador"]))
+        if(isset($parametros["mailTrabajador"]) && isset($parametros["passTrabajador"]))
         {
-            $mail = $parametros["mail"];
+            $mail = $parametros["mailTrabajador"];
             $password = $parametros["passTrabajador"];
             if(Validaciones::es_mail_valido($mail) && Validaciones::pass_valido($password))
             {

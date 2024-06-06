@@ -117,7 +117,7 @@ class trabajadoresController extends Trabajador implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
     
-    public static function buscarPorMail($mail)
+    public static function buscarPorMail($mail) : mixed
     {
         return Trabajador::buscarPorMail($mail);
     }

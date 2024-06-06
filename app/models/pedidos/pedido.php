@@ -8,7 +8,8 @@ class Pedido
     public string $mesa;
     public string $estado;
     public float $monto;
-    public string $fechaAlta;
+    public string $alta;
+    public string $entrega;
     public int $tiempoEstimado;
     public int $tiempoFinal;
     
@@ -16,10 +17,10 @@ class Pedido
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objAccesoDatos->RetornarConsulta("INSERT INTO pedidos (codigo, cliente, idMozo, 
-                                                        mesa, estado, monto, fechaAlta, tiempoEstimado, 
+                                                        mesa, estado, monto, alta, entrega, tiempoEstimado, 
                                                         tiempoFinal) 
                                                         VALUES (:codigo, :cliente, :idMozo, :mesa, :estado, 
-                                                        :monto, :fechaAlta, :tiempoEstimado, :tiempoFinal)");
+                                                        :monto, :alta, :entrega, :tiempoEstimado, :tiempoFinal)");
         
         $consulta->bindValue(':codigo', $this->codigo, PDO::PARAM_STR);
         $consulta->bindValue(':cliente', $this->cliente, PDO::PARAM_STR);
@@ -27,7 +28,8 @@ class Pedido
         $consulta->bindValue(':mesa', $this->mesa, PDO::PARAM_STR);
         $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
         $consulta->bindValue(':monto', strval($this->monto), PDO::PARAM_STR);
-        $consulta->bindValue(':fechaAlta', $this->fechaAlta, PDO::PARAM_STR);
+        $consulta->bindValue(':alta', $this->alta, PDO::PARAM_STR);
+        $consulta->bindValue(':entrega', $this->entrega, PDO::PARAM_STR);
         $consulta->bindValue(':tiempoEstimado', $this->tiempoEstimado, PDO::PARAM_INT);
         $consulta->bindValue(':tiempoFinal', $this->tiempoFinal, PDO::PARAM_INT);
         $consulta->execute();

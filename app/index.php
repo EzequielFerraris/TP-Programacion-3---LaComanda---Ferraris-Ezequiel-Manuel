@@ -4,6 +4,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy;
 
+date_default_timezone_set("America/Argentina/Buenos_Aires");
+
 require_once '../vendor/autoload.php'; //NOS TRAE LOS PAQUETES INSTALADOS
 require_once './controllers/trabajadoresControllers/trabajadoresController.php';
 require_once './controllers/productosControllers/productosController.php';
@@ -39,8 +41,9 @@ $app->group('/socios', function (RouteCollectorProxy $group)
 {
     $group->get('/listar', \socioController::class . ':TraerTodos');
     $group->post('/cargar', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) //chequea tipos
-                                                                    ->add(new ParamsSetSocio()); //chequea si se pasaron los campos
-});
+                                                                    ->add(new ParamsSetSocio()) //chequea si se pasaron los campos
+                                                                    ->add(new ValidarSocio()); //chequea permisos
+});                     
 
 $app->group('/trabajadores', function (RouteCollectorProxy $group) 
 {
@@ -61,23 +64,24 @@ $app->group('/productos', function (RouteCollectorProxy $group)
     //CARGAR UN PRODUCTO (REQUIERE PASSWORD ¿SOCIOS?)
     $group->post('/cargar', \ProductosController::class . ':CargarUno')->add(new AuthProductoABM()) //chequea tipos
                                                                         ->add(new ParamsSetProducto())
-                                                                        ->add(new ValidarTrabajador("mozo")); //chequea si se pasaron los campos
+                                                                        ->add(new ValidarSocio()); //chequea permisos
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) 
 {
     //LISTAR TODAS
     $group->get('/listar', \MesasController::class . ':TraerTodos');
-     //CARGAR UNA MESA (REQUIERE PASSWORD ¿SOCIOS?)
     $group->post('/cargar', \MesasController::class . ':CargarUno')->add(new AuthMesaABM()) //chequea tipos
-                                                                    ->add(new ParamsSetMesa()); //chequea si se pasaron los campos
+                                                                    ->add(new ParamsSetMesa())  //chequea si se pasaron los campos
+                                                                    ->add(new ValidarSocio()); //chequea permisos
 });
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) 
 {
     $group->get('/listar', \PedidosController::class . ':TraerTodos');
     $group->post('/cargar', \PedidosController::class . ':CargarUno')->add(new AuthPedidoABM()) //chequea tipos
-                                                                        ->add(new ParamsSetPedido()); //chequea si se pasaron los campos
+                                                                        ->add(new ParamsSetPedido()) //chequea si se pasaron los campos
+                                                                        ->add(new ValidarTrabajador("mozo")); //chequea permisos
 });
 
 $app->run();

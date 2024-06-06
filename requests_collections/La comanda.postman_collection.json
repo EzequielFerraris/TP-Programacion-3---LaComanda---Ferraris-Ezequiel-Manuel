@@ -287,6 +287,26 @@
 			"response": []
 		},
 		{
+			"name": "localhost/lacomanda/app/productos/listar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/productos/listar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"productos",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost/lacomanda/app/socios",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -545,14 +565,15 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/mesas",
+					"raw": "localhost/lacomanda/app/mesas/listar",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"mesas"
+						"mesas",
+						"listar"
 					],
 					"query": [
 						{
@@ -575,7 +596,7 @@
 					"urlencoded": [
 						{
 							"key": "codigo",
-							"value": "asd16",
+							"value": "asd13",
 							"type": "text"
 						},
 						{
@@ -585,7 +606,7 @@
 						},
 						{
 							"key": "idMozo",
-							"value": "1",
+							"value": "6",
 							"type": "text"
 						},
 						{
@@ -605,7 +626,7 @@
 						},
 						{
 							"key": "fechaAlta",
-							"value": "2024-06-03",
+							"value": "2024-5-2",
 							"type": "text"
 						},
 						{
@@ -615,7 +636,7 @@
 						},
 						{
 							"key": "tiempoFinal",
-							"value": "1",
+							"value": "0",
 							"type": "text"
 						},
 						{
@@ -658,22 +679,42 @@
 					"urlencoded": [
 						{
 							"key": "apellido",
-							"value": "Fernandez",
+							"value": "Gomez",
 							"type": "text"
 						},
 						{
 							"key": "nombre",
-							"value": "Facundo",
+							"value": "Federico",
 							"type": "text"
 						},
 						{
 							"key": "fechaIngreso",
-							"value": "2024-1-18",
+							"value": "2024-5-15",
 							"type": "text"
 						},
 						{
 							"key": "puesto",
 							"value": "cocinero",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "go.fer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "mailSocio",
+							"value": "pg_2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "passSocio",
+							"value": "ref123",
 							"type": "text"
 						}
 					]
@@ -702,13 +743,23 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "codigo",
-							"value": "56pos",
+							"key": "mailSocio",
+							"value": "pg_2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "passSocio",
+							"value": "123456",
 							"type": "text"
 						},
 						{
 							"key": "estado",
 							"value": "libre",
+							"type": "text"
+						},
+						{
+							"key": "codigo",
+							"value": "55555",
 							"type": "text"
 						}
 					]
@@ -738,21 +789,31 @@
 					"urlencoded": [
 						{
 							"key": "apellido",
-							"value": "Socio2",
+							"value": "socioI",
 							"type": "text"
 						},
 						{
 							"key": "nombre",
-							"value": "Socio2",
+							"value": "socioI",
 							"type": "text"
 						},
 						{
 							"key": "mail",
-							"value": "socio2@gmail.com",
+							"value": "pg_2@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "clave",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "mailSocio",
+							"value": "pg_2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "passSocio",
 							"value": "123456",
 							"type": "text"
 						}
@@ -767,6 +828,61 @@
 						"lacomanda",
 						"app",
 						"socios",
+						"cargar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/productos/cargar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Milanesa a caballo",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "9000",
+							"type": "text"
+						},
+						{
+							"key": "sector",
+							"value": "cocina",
+							"type": "text"
+						},
+						{
+							"key": "hayStock",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "go.fer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "passTrabajador",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/productos/cargar",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"productos",
 						"cargar"
 					]
 				}

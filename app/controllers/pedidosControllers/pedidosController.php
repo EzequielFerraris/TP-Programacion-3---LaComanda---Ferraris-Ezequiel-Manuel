@@ -13,10 +13,11 @@ class PedidosController extends Pedido implements ABM
         $idMozo = $parametros['idMozo'];
         $mesa = $parametros['mesa'];
         $estado = $parametros['estado'];
-        $monto = $parametros['monto'];
-        $fechaAlta = $parametros['fechaAlta'];
-        $tiempoEstimado = $parametros['tiempoEstimado'];
-        $tiempoFinal = $parametros['tiempoFinal'];
+        $monto = 0;
+        $alta = date("Y-m-d H:i:s");
+        $entrega = "00-00-00 00:00:00";
+        $tiempoEstimado = 0;
+        $tiempoFinal = 0;
 
         // Creamos el pedido
         $instancia = new Pedido();  
@@ -27,7 +28,8 @@ class PedidosController extends Pedido implements ABM
         $instancia->mesa = $mesa;
         $instancia->estado = $estado;
         $instancia->monto = $monto;
-        $instancia->fechaAlta = $fechaAlta;
+        $instancia->alta = $alta;
+        $instancia->entrega = $entrega;
         $instancia->tiempoEstimado = $tiempoEstimado;
         $instancia->tiempoFinal = $tiempoFinal;
         
@@ -76,7 +78,8 @@ class PedidosController extends Pedido implements ABM
         if(isset($request['mesa'])) {$instancia->mesa = $request['mesa'];}
         if(isset($request['estado'])) {$instancia->estado = $request['estado'];}
         if(isset($request['monto'])) {$instancia->monto = $request['monto'];}
-        if(isset($request['fechaAlta'])) {$instancia->fechaAlta = $request['fechaAlta'];}
+        if(isset($request['alta'])) {$instancia->alta = $request['alta'];}
+        if(isset($request['entrega'])) {$instancia->alta = $request['entrega'];}
         if(isset($request['tiempoEstimado'])) {$instancia->tiempoEstimado = $request['tiempoEstimado'];}
         if(isset($request['tiempoFinal'])) {$instancia->tiempoFinal = $request['tiempoFinal'];}
         
@@ -107,20 +110,6 @@ class PedidosController extends Pedido implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
-    public function HardDeleteUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
-
-        $codigo = $parametros['codigo'];
-
-        Producto::hardDelete($codigo);
-
-        $payload = json_encode(array("mensaje" => "Pedido eliminado con exito"));
-
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
 }
 
 ?>
