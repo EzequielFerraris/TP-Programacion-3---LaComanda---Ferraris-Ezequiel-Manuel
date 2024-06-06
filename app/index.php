@@ -60,7 +60,8 @@ $app->group('/productos', function (RouteCollectorProxy $group)
     $group->get('/listar/{sector}', \ProductosController::class . ':TraerProductosPorSector');    
     //CARGAR UN PRODUCTO (REQUIERE PASSWORD ¿SOCIOS?)
     $group->post('/cargar', \ProductosController::class . ':CargarUno')->add(new AuthProductoABM()) //chequea tipos
-                                                                        ->add(new ParamsSetProducto()); //chequea si se pasaron los campos
+                                                                        ->add(new ParamsSetProducto())
+                                                                        ->add(new ValidarTrabajador("mozo")); //chequea si se pasaron los campos
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) 
