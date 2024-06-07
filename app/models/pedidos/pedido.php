@@ -56,6 +56,18 @@ class Pedido
 
         return $consulta->fetchObject('Pedido');
     }
+
+    public static function filtrarMozoEstado($id, $estado)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM pedidos 
+                                                        WHERE idMozo = :idMozo AND estado = :estado");
+        $consulta->bindValue(':idMozo', $id, PDO::PARAM_INT);
+        $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Pedido');
+    }
 }
 
 ?>

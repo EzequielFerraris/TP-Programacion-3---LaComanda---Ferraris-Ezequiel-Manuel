@@ -110,6 +110,22 @@ class PedidosController extends Pedido implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public static function CheckPedido($codigo) : bool
+    {
+        $resultado = false;
+        try
+        {
+            $pedido = Pedido::buscar($codigo);
+        
+            if($pedido instanceof Pedido)
+            {
+                $resultado = true;
+            }
+        }
+        catch(Exception $e){}
+
+        return $resultado;
+    }
 }
 
 ?>

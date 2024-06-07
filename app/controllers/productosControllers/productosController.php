@@ -101,19 +101,21 @@ class ProductosController extends Producto implements ABM
           ->withHeader('Content-Type', 'application/json');
     }
 
-    public function HardDeleteUno($request, $response, $args)
+    public static function CheckProducto($id) : bool
     {
-        $parametros = $request->getParsedBody();
+        $resultado = false;
+        try
+        {
+            $producto = Producto::buscarPorId($id);
+        
+            if($producto instanceof Producto)
+            {
+                $resultado = true;
+            }
+        }
+        catch(Exception $e){}
 
-        $id = $parametros['id'];
-
-        Producto::hardDelete($id);
-
-        $payload = json_encode(array("mensaje" => "Producto eliminado con exito"));
-
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
+        return $resultado;
     }
 
 }

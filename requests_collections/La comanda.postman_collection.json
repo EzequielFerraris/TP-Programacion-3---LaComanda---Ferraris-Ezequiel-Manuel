@@ -587,7 +587,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/pedidos/cargar",
+			"name": "localhost/lacomanda/app/mozos/cargar/pedido",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -596,22 +596,22 @@
 					"urlencoded": [
 						{
 							"key": "codigo",
-							"value": "asd13",
+							"value": "ped01",
 							"type": "text"
 						},
 						{
 							"key": "cliente",
-							"value": "Juan",
+							"value": "José",
 							"type": "text"
 						},
 						{
 							"key": "idMozo",
-							"value": "6",
+							"value": "9",
 							"type": "text"
 						},
 						{
 							"key": "mesa",
-							"value": "654jn",
+							"value": "55555",
 							"type": "text"
 						},
 						{
@@ -620,43 +620,28 @@
 							"type": "text"
 						},
 						{
-							"key": "monto",
-							"value": "100000",
+							"key": "mailTrabajador",
+							"value": "go.fe@gmail.com",
 							"type": "text"
 						},
 						{
-							"key": "fechaAlta",
-							"value": "2024-5-2",
+							"key": "passTrabajador",
+							"value": "ref123",
 							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "0",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/pedidos/cargar",
+					"raw": "localhost/lacomanda/app/mozos/cargar/pedido",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"pedidos",
-						"cargar"
+						"mozos",
+						"cargar",
+						"pedido"
 					],
 					"query": [
 						{
@@ -670,7 +655,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/trabajadores/cargar",
+			"name": "localhost/lacomanda/app/socios/cargar/trabajador",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -714,28 +699,29 @@
 						},
 						{
 							"key": "passSocio",
-							"value": "ref123",
+							"value": "123456",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/cargar",
+					"raw": "localhost/lacomanda/app/socios/cargar/trabajador",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"trabajadores",
-						"cargar"
+						"socios",
+						"cargar",
+						"trabajador"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/mesas/cargar",
+			"name": "localhost/lacomanda/app/socios/cargar/mesa",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -765,22 +751,23 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/mesas/cargar",
+					"raw": "localhost/lacomanda/app/socios/cargar/mesa",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"mesas",
-						"cargar"
+						"socios",
+						"cargar",
+						"mesa"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/socios/cargar",
+			"name": "localhost/lacomanda/app/socios/cargar/socio",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -820,7 +807,7 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/socios/cargar",
+					"raw": "localhost/lacomanda/app/socios/cargar/socio",
 					"host": [
 						"localhost"
 					],
@@ -828,14 +815,15 @@
 						"lacomanda",
 						"app",
 						"socios",
-						"cargar"
+						"cargar",
+						"socio"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/productos/cargar",
+			"name": "localhost/lacomanda/app/socios/cargar/producto",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -844,12 +832,12 @@
 					"urlencoded": [
 						{
 							"key": "nombre",
-							"value": "Milanesa a caballo",
+							"value": "Daikiri",
 							"type": "text"
 						},
 						{
 							"key": "precio",
-							"value": "9000",
+							"value": "4000",
 							"type": "text"
 						},
 						{
@@ -864,26 +852,27 @@
 						},
 						{
 							"key": "mail",
-							"value": "go.fer@gmail.com",
+							"value": "go.fe@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "passTrabajador",
-							"value": "123",
+							"value": "ref123",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/productos/cargar",
+					"raw": "localhost/lacomanda/app/socios/cargar/producto",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"productos",
-						"cargar"
+						"socios",
+						"cargar",
+						"producto"
 					]
 				}
 			},
