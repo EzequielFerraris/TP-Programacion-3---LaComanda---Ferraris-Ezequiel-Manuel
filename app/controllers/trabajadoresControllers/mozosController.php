@@ -20,6 +20,7 @@ class mozosController
         $relacion->id_producto = $idProducto;
         $relacion->estado = $estado;
         $relacion->id_trabajador = null; 
+        $relacion->tiempo_est_minutos = 0;
 
         $resultadoQuery = $relacion->agregar();
         
@@ -83,6 +84,29 @@ class mozosController
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
+
+    public function MarcarPedidoEntregado($request, $response, $args)
+    {
+        $params = $request->getParsedBody();
+
+        $codigo = $params["codigo"];
+
+        //MARCAR COMO LISTO EL PEDIDO_PRODUCTO
+
+        $pedido = Pedido::buscar($codigo);
+        $pedido->estado = "Entregado";
+        $pedido->entrega = date("Y-m-d H:i:s");
+        //CALCULAR CUÁNTO SE TARDÓ EN ENTREGAR EL PEDIDO
+        $diferencia = abs(strtotime($pedido->alta) - (new \DateTime)->getTimestamp()) / 60;
+        $pedido->tiempoFinal = $diferencia;
+        $pedido->update();
+
+        $payload = json_encode(array("listaProductos" => "Pedido entregado."));
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
 
 }
 

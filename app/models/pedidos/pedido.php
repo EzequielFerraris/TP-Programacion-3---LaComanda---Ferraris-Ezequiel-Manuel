@@ -37,6 +37,28 @@ class Pedido
         return $objAccesoDatos->RetornarUltimoIdInsertado();
     }
 
+    public function update()
+    {
+        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDato->RetornarConsulta("UPDATE pedidos SET cliente = :cliente, idMozo = :idMozo, 
+                                                        mesa = :mesa, estado = :estado, monto = :monto, 
+                                                        alta = :alta, entrega = :entrega, 
+                                                        tiempoEstimado = :tiempoEstimado, tiempoFinal = :tiempoFinal
+                                                        WHERE codigo = :codigo");
+                                                        
+         $consulta->bindValue(':codigo', $this->codigo, PDO::PARAM_STR);
+         $consulta->bindValue(':cliente', $this->cliente, PDO::PARAM_STR);
+         $consulta->bindValue(':idMozo', $this->idMozo, PDO::PARAM_INT);
+         $consulta->bindValue(':mesa', $this->mesa, PDO::PARAM_STR);
+         $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+         $consulta->bindValue(':monto', strval($this->monto), PDO::PARAM_STR);
+         $consulta->bindValue(':alta', $this->alta, PDO::PARAM_STR);
+         $consulta->bindValue(':entrega', $this->entrega, PDO::PARAM_STR);
+         $consulta->bindValue(':tiempoEstimado', $this->tiempoEstimado, PDO::PARAM_INT);
+         $consulta->bindValue(':tiempoFinal', $this->tiempoFinal, PDO::PARAM_INT);
+        $consulta->execute();
+    }
+
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();

@@ -14,9 +14,8 @@ require_once './controllers/mesasControllers/mesasController.php';
 require_once './controllers/sociosControllers/socioController.php';
 require_once './controllers/pedidosControllers/pedidosController.php';
 require_once './controllers/trabajadoresControllers/mozosController.php';
-require_once './controllers/trabajadoresControllers/bartendersController.php';
-require_once './controllers/trabajadoresControllers/cervecerosController.php';
-require_once './controllers/trabajadoresControllers/cocinerosController.php';
+require_once './controllers/trabajadoresControllers/atenderPedidoController.php';
+
 
 require_once './middleware/auth/authTrabajadorABM.php';
 require_once './middleware/auth/authSocioABM.php';
@@ -91,27 +90,53 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
     $group->post('/cargar/pedidoProducto', \mozosController::class . ':cargarProductoEnPedido')->add(new AuthPedidoProductoABM()) //chequea tipos
                                                                                             ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
                                                                                             ->add(new ValidarTrabajador("mozo"));
+    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado');
 });
 
 //RUTAS CERVECEROS
 $app->group('/cerveceros', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \cervecerosController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    
+    //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    //MARCAR PRODUCTO COMO LISTO
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+
 });
 
 //RUTAS BARTENDERS
 $app->group('/bartenders', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \bartendersController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    //MARCAR PRODUCTO COMO LISTO
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
 });
 
 //RUTAS COCINEROS
 $app->group('/cocineros', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \cocinerosController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    //MARCAR PRODUCTO COMO LISTO
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+});
+
+//RUTAS COCINEROS CANDYBAR
+$app->group('/cocinerosCandybar', function (RouteCollectorProxy $group) 
+{
+    //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    //MARCAR PRODUCTO COMO LISTO
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
 });
 
 $app->run();
