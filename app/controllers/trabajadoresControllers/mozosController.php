@@ -96,9 +96,14 @@ class mozosController
         $pedido = Pedido::buscar($codigo);
         $pedido->estado = "Entregado";
         $pedido->entrega = date("Y-m-d H:i:s");
+
         //CALCULAR CUÁNTO SE TARDÓ EN ENTREGAR EL PEDIDO
         $diferencia = abs(strtotime($pedido->alta) - (new \DateTime)->getTimestamp()) / 60;
         $pedido->tiempoFinal = $diferencia;
+        
+        //CALCULAR EL MONTO FINAL DEL PEDIDO
+        $monto = Pedido_productos::obtenerMonto($pedido->codigo);
+        $pedido->monto = (float)$monto;
         $pedido->update();
 
         $payload = json_encode(array("listaProductos" => "Pedido entregado."));

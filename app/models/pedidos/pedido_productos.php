@@ -114,7 +114,7 @@ class Pedido_productos
         $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM pedidos_productos 
                                                         WHERE id_pedido = :id_pedido");
 
-        $consulta->bindValue(':id_pedido', $codigoPedido, PDO::PARAM_STR);;
+        $consulta->bindValue(':id_pedido', $codigoPedido, PDO::PARAM_STR);
         $consulta->execute();
 
         $consulta = $consulta->fetchAll(PDO::FETCH_CLASS, "Pedido_productos");
@@ -133,16 +133,37 @@ class Pedido_productos
         return $resultado;
     }
 
-    public static function obtenerTiemposPorTrabajador() 
+    public static function obtenerTiemposPorTrabajador($codigoPedido) 
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
 
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id_trabajador, SUM(tiempo_est_minutos) AS tiempo FROM 
-                                                        pedidos_productos GROUP BY id_trabajador 
-                                                        ORDER BY SUM(tiempo_est_minutos) DESC");
-
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id_trabajador, SUM(tiempo_est_minutos) as tiempo 
+                                                        FROM pedidos_productos
+                                                        WHERE id_pedido = :id_pedido
+                                                        GROUP BY id_trabajador 
+                                                        ORDER BY tiempo
+                                                        DESC");
+                                  
+        $consulta->bindValue(':id_pedido', $codigoPedido, PDO::PARAM_STR);
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function obtenerMonto($pedido) 
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT SUM(pr.precio) AS monto FROM pedidos_productos 
+                                                        as pp INNER JOIN productos as pr
+                                                        ON pp.id_producto = pr.id
+                                                        WHERE pp.id_pedido = :pedido AND pp.estado = 'listo'");
+
+        $consulta->bindValue(':pedido', $pedido, PDO::PARAM_STR);
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result[0]["monto"];
     }
 }

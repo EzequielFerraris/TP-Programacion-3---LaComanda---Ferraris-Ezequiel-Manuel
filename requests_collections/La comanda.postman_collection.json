@@ -587,6 +587,27 @@
 			"response": []
 		},
 		{
+			"name": "localhost/lacomanda/app/bartenders/listar/pendientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/bartenders/listar/pendientes",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"bartenders",
+						"listar",
+						"pendientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost/lacomanda/app/mozos/cargar/pedido",
 			"request": {
 				"method": "POST",
@@ -873,6 +894,192 @@
 						"socios",
 						"cargar",
 						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/mozo/cargar/pedidoProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pedido",
+							"value": "ped01",
+							"type": "text"
+						},
+						{
+							"key": "producto",
+							"value": "11",
+							"type": "text"
+						},
+						{
+							"key": "mailTrabajador",
+							"value": "go.fe@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "passTrabajador",
+							"value": "ref123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/cargar/pedidoProducto",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"cargar",
+						"pedidoProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/cerveceros/tomarProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mailTrabajador",
+							"value": "go.fer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "id_pendiente",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "tiempoEstimado",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/cerveceros/tomarProducto",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"cerveceros",
+						"tomarProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/cerveceros/tomarProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mailTrabajador",
+							"value": "go.fer@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id_pendiente",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "tiempoEstimado",
+							"value": "5",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/cerveceros/productoListo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"cerveceros",
+						"productoListo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/mozos/entregarPedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "codigo",
+							"value": "ped01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/entregarPedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"entregarPedido"
+					],
+					"query": [
+						{
+							"key": "codigo",
+							"value": "ped01",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/cerveceros/listar/pendientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/cerveceros/listar/pendientes",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"cerveceros",
+						"listar",
+						"pendientes"
 					]
 				}
 			},

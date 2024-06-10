@@ -60,10 +60,12 @@ class atenderPedidoController
         $pedido_producto->id_trabajador = $trabajador->id;
         $pedido_producto->tiempo_est_minutos = $tiempo_est_minutos;
 
-        $tiempos = Pedido_productos::obtenerTiemposPorTrabajador();
+        //MODIFICAR EL TIEMPO ESTIMADO
+        $tiempos = Pedido_productos::obtenerTiemposPorTrabajador($pedido_producto->id_pedido);
         $tiempoEstimado = $tiempos[0]["tiempo"];
+
         $pedido = Pedido::buscar($pedido_producto->id_pedido);
-        $pedido->tiempo_est_minutos = (int)($tiempoEstimado);
+        $pedido->tiempoEstimado = (int)($tiempoEstimado);
         $pedido->update();
 
         $pedido_producto->update();
@@ -101,8 +103,6 @@ class atenderPedidoController
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-
-
 }
 
 ?>
