@@ -32,6 +32,15 @@ class Producto
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
+    public static function obtenerTodosArray()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM productos");
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_NUM);
+    }
+
     public static function obtenerProductosPorSector(string $sectorS)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
@@ -88,13 +97,31 @@ class Producto
         $consulta->execute();
     }
 
-    public static function hardDelete($id)
+    public static function mapearProductosCSV(array $a)
     {
-        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM productos WHERE id = :id");
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-                
-        $consulta->execute();
+        $resultado = array();
+        foreach($a as $val)
+        {
+            $instancia = new Producto();      
+            $instancia->nombre = $val[0];
+            $instancia->precio = $val[1];
+            $instancia->sector = $val[2];
+            $instancia->hayStock = $val[3];   
+            array_push($resultado, $instancia);                         
+        }                
+        return $resultado;
+    }
+
+    public static function guardarProductosCSV(array $a)
+    {
+        $resultado = true;
+
+        foreach($a as $val)
+        {
+            $val->crear() ? true : $resultado = false;
+        }
+
+        return $resultado;
     }
 }
 

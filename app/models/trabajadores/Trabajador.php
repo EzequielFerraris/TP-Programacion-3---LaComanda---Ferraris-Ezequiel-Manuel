@@ -45,6 +45,15 @@ class Trabajador
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, "Trabajador");
     }
+
+    public static function obtenerTodosArray()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM trabajadores");
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_NUM);
+    }
     public static function buscar($apellido, $nombre)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();

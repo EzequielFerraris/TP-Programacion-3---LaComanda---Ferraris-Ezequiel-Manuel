@@ -101,18 +101,30 @@ class mozosController
         $diferencia = abs(strtotime($pedido->alta) - (new \DateTime)->getTimestamp()) / 60;
         $pedido->tiempoFinal = $diferencia;
         
-        //CALCULAR EL MONTO FINAL DEL PEDIDO
-        $monto = Pedido_productos::obtenerMonto($pedido->codigo);
-        $pedido->monto = (float)$monto;
-        $pedido->update();
-
-        $payload = json_encode(array("listaProductos" => "Pedido entregado."));
+        $payload = json_encode(array("mensaje" => "Pedido entregado."));
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public function CobrarPedido($request, $response, $args)
+    {
+        $params = $request->getParsedBody();
 
+        $codigo = $params["codigo"];
+
+        $pedido = Pedido::buscar($codigo);
+        
+        //CALCULAR EL MONTO FINAL DEL PEDIDO
+        $monto = Pedido_productos::obtenerMonto($pedido->codigo);
+        $pedido->monto = (float)$monto;
+        $pedido->update();
+
+        $payload = json_encode(array("Monto a pagar:" => $pedido->monto));
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
 }
 
 

@@ -224,6 +224,39 @@ abstract class Validaciones
         return $result;
     }
 
+    public static function es_objeto_valido(string $par) : bool
+    {
+        $result = false;
+        if(Validaciones::es_letras($par))
+        {
+            switch($par)
+            {
+                case "pedido":
+                case "trabajador":
+                case "producto":
+                    $result = true;
+                break;   
+            }
+        }
+        
+        return $result;
+    }
+
+    public static function es_csv($file) : bool
+    {
+        $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 
+                            'application/octet-stream', 'application/vnd.ms-excel', 
+                            'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 
+                            'application/excel', 'application/vnd.msexcel', 'text/plain');
+        $result = false;
+        if(in_array($file->getClientMediaType(), $csvMimes))
+        {
+            $result = true;
+        }
+        
+        return $result;
+    }
+    
 }
 
 

@@ -68,6 +68,15 @@ class Pedido
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
     }
 
+    public static function obtenerTodosArray()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM pedidos");
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_NUM);
+    }
+
     public static function buscar($codigo)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
