@@ -24,6 +24,7 @@ require_once './middleware/auth/authProductoABM.php';
 require_once './middleware/auth/authMesaABM.php';
 require_once './middleware/auth/authPedidoABM.php';
 require_once './middleware/auth/authPedidoProductoABM.php';
+require_once './middleware/auth/authLogin.php';
 
 require_once './middleware/paramsSet/paramsSetTrabajador.php';
 require_once './middleware/paramsSet/paramsSetMesa.php';
@@ -31,24 +32,18 @@ require_once './middleware/paramsSet/paramsSetSocio.php';
 require_once './middleware/paramsSet/paramsSetProducto.php';
 require_once './middleware/paramsSet/paramsSetPedido.php';
 require_once './middleware/paramsSet/paramsSetPedidoProducto.php';
+require_once './middleware/paramsSet/paramsSetLogin.php';
 
 require_once './middleware/users/validarJWT.php';
-
 
 $app = AppFactory::create();
 
 // Set base path
 $app->setBasePath('/lacomanda/app');
 
-//DEFAULT RAIZ
-$app->get('/', function (Request $request, Response $response, array $args) 
-{
-    $response->getBody()->write("Bienvenido a nuestra APP!");
-    return $response;
-});
-
-$app->post('/login', \LoginController::class . ':login'); //FALTA MDWR PARA CHEQUEAR SI SE PASARON LOS PARAM Y SI SON VÁLIDOS
-
+//DEFAULT LOGIN
+$app->post('/login', \LoginController::class . ':login')->add(new AuthLogin()) //chequea tipos
+                                                        ->add(new ParamsSetLogin()); //chequea si se pasaron los campos 
 //RUTAS SOCIOS
 $app->group('/socios', function (RouteCollectorProxy $group) 
 {
