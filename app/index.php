@@ -32,8 +32,8 @@ require_once './middleware/paramsSet/paramsSetProducto.php';
 require_once './middleware/paramsSet/paramsSetPedido.php';
 require_once './middleware/paramsSet/paramsSetPedidoProducto.php';
 
-require_once './middleware/users/validarSocio.php';
-require_once './middleware/users/validarTrabajador.php';
+require_once './middleware/users/validarJWT.php';
+
 
 $app = AppFactory::create();
 
@@ -47,71 +47,72 @@ $app->get('/', function (Request $request, Response $response, array $args)
     return $response;
 });
 
-$app->post('/login', \LoginController::class . ':login');
+$app->post('/login', \LoginController::class . ':login'); //FALTA MDWR PARA CHEQUEAR SI SE PASARON LOS PARAM Y SI SON VÁLIDOS
 
 //RUTAS SOCIOS
 $app->group('/socios', function (RouteCollectorProxy $group) 
 {
-    $group->get('/listar/socios', \socioController::class . ':TraerTodos');
-    $group->get('/listar/trabajadores', \trabajadoresController::class . ':TraerTodos');
-    $group->get('/listar/mesas', \MesasController::class . ':TraerTodos');
-    $group->get('/listar/productos', \ProductosController::class . ':TraerTodos');
-    $group->get('/listar/productos/{sector}', \ProductosController::class . ':TraerProductosPorSector');
-    $group->get('/listar/pedidos', \PedidosController::class . ':TraerTodos');
+    $group->get('/listar/socios', \socioController::class . ':TraerTodos')->add(new validarJWT("socio"));
+    $group->get('/listar/trabajadores', \trabajadoresController::class . ':TraerTodos')->add(new validarJWT("socio"));
+    $group->get('/listar/mesas', \MesasController::class . ':TraerTodos')->add(new validarJWT("socio"));
+    $group->get('/listar/productos', \ProductosController::class . ':TraerTodos')->add(new validarJWT("socio"));
+    $group->get('/listar/productos/{sector}', \ProductosController::class . ':TraerProductosPorSector')->add(new validarJWT("socio"));
+    $group->get('/listar/pedidos', \PedidosController::class . ':TraerTodos')->add(new validarJWT("socio"));
 
     //CARGAR UN SOCIO (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/socio', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) //chequea tipos
                                                                     ->add(new ParamsSetSocio()) //chequea si se pasaron los campos
-                                                                    ; //chequea permisos
+                                                                    ->add(new validarJWT("socio")); //chequea permisos
 
     //CARGAR UN TRABAJADOR (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/trabajador', \trabajadoresController::class . ':CargarUno') ->add(new AuthTrabajadorABM()) //chequea tipos
                                                                             ->add(new ParamsSetTrabajador()) //chequea si se pasaron los campos
-                                                                            ; //chequea permisos
+                                                                            ->add(new validarJWT("socio")); //chequea permisos
 
     //CARGAR UN PRODUCTO (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/producto', \ProductosController::class . ':CargarUno')->add(new AuthProductoABM()) //chequea tipos
                                                                         ->add(new ParamsSetProducto())
-                                                                        ; //chequea permisos
+                                                                        ->add(new validarJWT("socio")); //chequea permisos
     //CARGAR UNA MESA (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/mesa', \MesasController::class . ':CargarUno')->add(new AuthMesaABM()) //chequea tipos
                                                                     ->add(new ParamsSetMesa())  //chequea si se pasaron los campos
-                                                                    ; //chequea permisos
+                                                                    ->add(new validarJWT("socio")); //chequea permisos
 
     $group->post('/cargar/productos/csv', \CsvController::class . ':guardarCSV')//->add(new AuthMesaABM()) //chequea tipos
                                                                     //->add(new ParamsSetMesa())  //chequea si se pasaron los campos
                                                                     //->add(new ValidarSocio())
-                                                                    ; //chequea permisos
+                                                                    ->add(new validarJWT("socio")); //chequea permisos
 
 });                     
 
 //RUTAS MOZOS
 $app->group('/mozo', function (RouteCollectorProxy $group) 
 {
-    $group->get('/listar/pedidos', \mozosController::class . ':TraerPorEstado');
-    $group->get('/listar/pedidos/productos', \mozosController::class . ':TraerPorPedido');
+    $group->get('/listar/pedidos', \mozosController::class . ':TraerPorEstado')->add(new validarJWT("mozo"));
+    $group->get('/listar/pedidos/productos', \mozosController::class . ':TraerPorPedido')->add(new validarJWT("mozo"));
 
     //CARGAR UN PEDIDO (REQUIERE PASSWORD MOZO)
     $group->post('/cargar/pedido', \PedidosController::class . ':CargarUno')->add(new AuthPedidoABM()) //chequea tipos
                                                                         ->add(new ParamsSetPedido()) //chequea si se pasaron los campos
-                                                                        ; //chequea permisos
+                                                                        ->add(new validarJWT("mozo")); //chequea permisos
     //CARGAR UN PRODUCTO A UN PEDIDO (REQUIERE PASSWORD MOZO)
     $group->post('/cargar/pedidoProducto', \mozosController::class . ':cargarProductoEnPedido')->add(new AuthPedidoProductoABM()) //chequea tipos
                                                                                             ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
-                                                                                            ;
-    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado');
+                                                                                            ->add(new validarJWT("mozo"));
+
+    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new validarJWT("mozo"));
 });
 
 //RUTAS CERVECEROS
 $app->group('/cerveceros', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes')->add(new validarJWT("cervecero"));
     
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
-    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new validarJWT("cervecero"));
     //MARCAR PRODUCTO COMO LISTO
-    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new validarJWT("cervecero"));
 
 });
 
@@ -119,33 +120,33 @@ $app->group('/cerveceros', function (RouteCollectorProxy $group)
 $app->group('/bartenders', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes')->add(new validarJWT("bartender"));
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
-    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new validarJWT("bartender"));
     //MARCAR PRODUCTO COMO LISTO
-    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new validarJWT("bartender"));
 });
 
 //RUTAS COCINEROS
 $app->group('/cocineros', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes')->add(new validarJWT("cocinero"));
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
-    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new validarJWT("cocinero"));
     //MARCAR PRODUCTO COMO LISTO
-    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new validarJWT("cocinero"));
 });
 
 //RUTAS COCINEROS CANDYBAR
 $app->group('/cocinerosCandybar', function (RouteCollectorProxy $group) 
 {
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    $group->get('/listar/pendientes', \atenderPedidoController::class . ':TraerPendientes')->add(new validarJWT("cocineroCandybar"));
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
-    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new validarJWT("cocineroCandybar"));
     //MARCAR PRODUCTO COMO LISTO
-    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo');
+    $group->post('/productoListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new validarJWT("cocineroCandybar"));
 });
 
 $app->run();

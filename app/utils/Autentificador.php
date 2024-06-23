@@ -1,6 +1,7 @@
 <?php
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class AutentificadorJWT
 {
@@ -16,22 +17,26 @@ class AutentificadorJWT
             'exp' => $ahora + (600000),
             'aud' => self::Aud(),
             'data' => $datos,
-            'app' => "Test JWT"
+            'app' => "La Comanda"
         );
         return JWT::encode($payload, self::$claveSecreta, self::$tipoEncriptacion);
     }
 
     public static function VerificarToken($token)
     {
-        if (empty($token)) {
+        if (empty($token)) 
+        {
             throw new Exception("El token esta vacío.");
         }
-        try {
+        try 
+        {
             $decodificado = JWT::decode(
                 $token,
-                self::$claveSecreta,
+                new Key(self::$claveSecreta, self::$tipoEncriptacion)
             );
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) 
+        {
             throw $e;
         }
         if ($decodificado->aud !== self::Aud()) {
@@ -47,7 +52,7 @@ class AutentificadorJWT
         }
         return JWT::decode(
             $token,
-            self::$claveSecreta
+            new Key(self::$claveSecreta, self::$tipoEncriptacion)
         );
     }
 
@@ -55,7 +60,7 @@ class AutentificadorJWT
     {
         return JWT::decode(
             $token,
-            self::$claveSecreta
+            new Key(self::$claveSecreta, self::$tipoEncriptacion)
         )->data;
     }
 

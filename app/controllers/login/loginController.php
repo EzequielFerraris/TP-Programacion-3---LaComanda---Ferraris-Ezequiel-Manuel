@@ -1,6 +1,9 @@
 <?php
 
 include_once "utils/Autentificador.php";
+include_once "models/socios/socio.php";
+include_once "models/trabajadores/Trabajador.php";
+
 class LoginController
 {
     public function login($request, $response, $args)
@@ -11,17 +14,21 @@ class LoginController
         $password = $parametros["password"];
         $puesto = $parametros["puesto"];
 
-        $validez = true;
+        $validez = false;
 
         switch ($puesto)
         {
             case "socio":
+                $socio = Socio::buscarPorMail($mail);
+                if ($socio->login($password)) {$validez = true;}
             break;
             case "cervecero":
             case "bartender":
             case "cocinero":
             case "cocineroCandybar":
             case "mozo":
+                $empleado = Trabajador::buscarPorMail($mail);
+                if ($empleado->login($password)) {$validez = true;}
             break;
         }
 
@@ -36,15 +43,17 @@ class LoginController
             {
                 $payload = json_encode(array('Error' => $e->getMessage()));
             }
-            
-            $response->getBody()->write($payload);
-            return $response
-            ->withHeader('Content-Type', 'application/json');
+
         }
-
+        else
+        {
+            $payload = json_encode(array('Error' => "Alguno de los parámetros es incorrecto."));
+        }
+        
+        $response->getBody()->write($payload);
+        return $response
+            ->withHeader('Content-Type', 'application/json');
     }
- 
-
 }
 
 ?>
