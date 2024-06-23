@@ -15,7 +15,7 @@ require_once './controllers/sociosControllers/socioController.php';
 require_once './controllers/pedidosControllers/pedidosController.php';
 require_once './controllers/trabajadoresControllers/mozosController.php';
 require_once './controllers/trabajadoresControllers/atenderPedidoController.php';
-
+require_once './controllers/filesControllers/csvController.php';
 
 require_once './middleware/auth/authTrabajadorABM.php';
 require_once './middleware/auth/authSocioABM.php';
@@ -74,6 +74,12 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->post('/cargar/mesa', \MesasController::class . ':CargarUno')->add(new AuthMesaABM()) //chequea tipos
                                                                     ->add(new ParamsSetMesa())  //chequea si se pasaron los campos
                                                                     ->add(new ValidarSocio()); //chequea permisos
+
+    $group->post('/cargar/productos/csv', \CsvController::class . ':guardarCSV')//->add(new AuthMesaABM()) //chequea tipos
+                                                                    //->add(new ParamsSetMesa())  //chequea si se pasaron los campos
+                                                                    //->add(new ValidarSocio())
+                                                                    ; //chequea permisos
+
 });                     
 
 //RUTAS MOZOS
