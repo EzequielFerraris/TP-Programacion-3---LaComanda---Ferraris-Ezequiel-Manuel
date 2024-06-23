@@ -16,6 +16,7 @@ require_once './controllers/pedidosControllers/pedidosController.php';
 require_once './controllers/trabajadoresControllers/mozosController.php';
 require_once './controllers/trabajadoresControllers/atenderPedidoController.php';
 require_once './controllers/filesControllers/csvController.php';
+require_once './controllers/login/loginController.php';
 
 require_once './middleware/auth/authTrabajadorABM.php';
 require_once './middleware/auth/authSocioABM.php';
@@ -46,6 +47,8 @@ $app->get('/', function (Request $request, Response $response, array $args)
     return $response;
 });
 
+$app->post('/login', \LoginController::class . ':login');
+
 //RUTAS SOCIOS
 $app->group('/socios', function (RouteCollectorProxy $group) 
 {
@@ -59,21 +62,21 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     //CARGAR UN SOCIO (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/socio', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) //chequea tipos
                                                                     ->add(new ParamsSetSocio()) //chequea si se pasaron los campos
-                                                                    ->add(new ValidarSocio()); //chequea permisos
+                                                                    ; //chequea permisos
 
     //CARGAR UN TRABAJADOR (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/trabajador', \trabajadoresController::class . ':CargarUno') ->add(new AuthTrabajadorABM()) //chequea tipos
                                                                             ->add(new ParamsSetTrabajador()) //chequea si se pasaron los campos
-                                                                            ->add(new ValidarSocio()); //chequea permisos
+                                                                            ; //chequea permisos
 
     //CARGAR UN PRODUCTO (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/producto', \ProductosController::class . ':CargarUno')->add(new AuthProductoABM()) //chequea tipos
                                                                         ->add(new ParamsSetProducto())
-                                                                        ->add(new ValidarSocio()); //chequea permisos
+                                                                        ; //chequea permisos
     //CARGAR UNA MESA (REQUIERE PASSWORD SOCIOS)
     $group->post('/cargar/mesa', \MesasController::class . ':CargarUno')->add(new AuthMesaABM()) //chequea tipos
                                                                     ->add(new ParamsSetMesa())  //chequea si se pasaron los campos
-                                                                    ->add(new ValidarSocio()); //chequea permisos
+                                                                    ; //chequea permisos
 
     $group->post('/cargar/productos/csv', \CsvController::class . ':guardarCSV')//->add(new AuthMesaABM()) //chequea tipos
                                                                     //->add(new ParamsSetMesa())  //chequea si se pasaron los campos
@@ -91,11 +94,11 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
     //CARGAR UN PEDIDO (REQUIERE PASSWORD MOZO)
     $group->post('/cargar/pedido', \PedidosController::class . ':CargarUno')->add(new AuthPedidoABM()) //chequea tipos
                                                                         ->add(new ParamsSetPedido()) //chequea si se pasaron los campos
-                                                                        ->add(new ValidarTrabajador("mozo")); //chequea permisos
+                                                                        ; //chequea permisos
     //CARGAR UN PRODUCTO A UN PEDIDO (REQUIERE PASSWORD MOZO)
     $group->post('/cargar/pedidoProducto', \mozosController::class . ':cargarProductoEnPedido')->add(new AuthPedidoProductoABM()) //chequea tipos
                                                                                             ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
-                                                                                            ->add(new ValidarTrabajador("mozo"));
+                                                                                            ;
     $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado');
 });
 
