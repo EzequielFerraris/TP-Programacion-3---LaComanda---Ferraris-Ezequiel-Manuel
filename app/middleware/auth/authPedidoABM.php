@@ -15,9 +15,7 @@ class AuthPedidoABM
 
         $codigo = $parametros['codigo'];
         $cliente = $parametros['cliente'];
-        $idMozo = $parametros['idMozo'];
         $mesa = $parametros['mesa'];
-        $estado = $parametros['estado'];
         
         $valido = false;
         $parametroInvalido = "";
@@ -26,31 +24,16 @@ class AuthPedidoABM
         {
             if(Validaciones::es_letras($cliente))
             {
-                if(Validaciones::es_int($idMozo) && 
-                    trabajadoresController::ChequearUnoPorID($idMozo, "mozo"))
+                if(Validaciones::es_alfanumerico($mesa) && Validaciones::tiene_longitud_x($mesa, 5) 
+                && mesasController::CheckMesa($mesa))
                 {
-                    if(Validaciones::es_alfanumerico($mesa) && Validaciones::tiene_longitud_x($mesa, 5) 
-                        && mesasController::CheckMesa($mesa))
-                    {
-                        if(Validaciones::es_letras($estado))
-                        {
-                            $valido = true;
-                            $response = $handler->handle($request);
-                        }
-                        else
-                        {
-                            $parametroInvalido = "estado";
-                        }
-                    }
-                    else
-                    {
-                        $parametroInvalido = "mesa";
-                    }
+                    $valido = true;
+                    $response = $handler->handle($request); 
                 }
                 else
                 {
-                    $parametroInvalido = "idMozo";
-                }
+                    $parametroInvalido = "mesa";
+                }   
             }
             else
             {

@@ -24,28 +24,36 @@ class CsvController
 
         $path = self::moverArchivo($uploadedFile);
 
-        try
+        if($path != "")
         {
-            $arrayObjetos = self::leerCSV($path, true);
-
-            switch($objetoAGuardar)
+            try
             {
-                case "producto":
-                    $productos = Producto::mapearProductosCSV($arrayObjetos);
-                    $r = Producto::guardarProductosCSV($productos);
-                    $r ? $resultado = "Archivo cargado correctamente" : $resultado = "El archivo no se pudo guardar";
-                break;
-                default:
-                    $resultado = "No se pudo cargar el archivo";
-                break;
-            }
+                $arrayObjetos = self::leerCSV($path, true);
 
-            $payload = json_encode(array("mensaje" => $resultado));
+                switch($objetoAGuardar)
+                {
+                    case "producto":
+                        $productos = Producto::mapearProductosCSV($arrayObjetos);
+                        $r = Producto::guardarProductosCSV($productos);
+                        $r ? $resultado = "Archivo cargado correctamente" : $resultado = "El archivo no se pudo guardar";
+                    break;
+                    default:
+                        $resultado = "No se pudo cargar el archivo";
+                    break;
+                }
+
+                $payload = json_encode(array("mensaje" => $resultado));
+            }
+            catch(Exception $e)
+            {
+                $payload = json_encode(array("mensaje" => $e->getMessage()));
+            }
         }
-        catch(Exception $e)
+        else 
         {
-            $payload = json_encode(array("mensaje" => $e->getMessage()));
+            $payload = json_encode(array("mensaje" => "El archivo no se pudo guardar correctamente."));
         }
+        
           
         $response->getBody()->write($payload);
         return $response
@@ -90,7 +98,14 @@ class CsvController
 
         $path = self::$directoryUpload . DIRECTORY_SEPARATOR . $filename;
 
-        $uploadedFile->moveTo($path);
+        try
+        {
+            $uploadedFile->moveTo($path);
+        }
+        catch(Exception $e)
+        {
+            $path = "";
+        }
 
         return $path;
     }

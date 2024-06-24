@@ -11,7 +11,7 @@ class ParamsSetPedido
         $parametros = $request->getParsedBody();
 
         if(isset($parametros['codigo']) && isset($parametros['cliente']) 
-            && isset($parametros['idMozo']) && isset($parametros['mesa']) && isset($parametros['estado'])) 
+            && isset($parametros['mesa'])) 
         {
             $response = $handler->handle($request);
         } 

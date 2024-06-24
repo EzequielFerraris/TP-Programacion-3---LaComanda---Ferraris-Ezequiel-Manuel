@@ -18,6 +18,7 @@ require_once './controllers/trabajadoresControllers/mozosController.php';
 require_once './controllers/trabajadoresControllers/atenderPedidoController.php';
 require_once './controllers/filesControllers/csvController.php';
 require_once './controllers/login/loginController.php';
+require_once './controllers/filesControllers/imagesController.php';
 
 //MIDDLEWARE CHECK TODOS LOS PARAMETROS INCLUIDOS 
 require_once './middleware/paramsSet/paramsSetTrabajador.php';
@@ -109,7 +110,9 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
     $group->post('/cargar/pedidoProducto', \mozosController::class . ':cargarProductoEnPedido')->add(new AuthPedidoProductoABM()) //chequea tipos
                                                                                             ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
                                                                                             ->add(new validarJWT("mozo"));
-    //ENTREGAR UN PEDIDO 
+    //ASOCIAR IMAGEN A PEDIDO Y GUARDARLA
+    $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen');//->add(new validarJWT("mozo"));
+    //CARGAR UN PRODUCTO A UN PEDIDO                                                                                         //ENTREGAR UN PEDIDO 
     $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new validarJWT("mozo"));
     //COBRAR UN PEDIDO 
     $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new validarJWT("mozo"));

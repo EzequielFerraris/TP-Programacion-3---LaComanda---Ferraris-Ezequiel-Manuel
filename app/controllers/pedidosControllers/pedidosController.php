@@ -6,13 +6,18 @@ class PedidosController extends Pedido implements ABM
 {
     public function CargarUno($request, $response, $args)
     {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+        $trabajador = Trabajador::buscarPorId(AutentificadorJWT::ObtenerID($token));
+
         $parametros = $request->getParsedBody();
 
         $codigo = $parametros['codigo'];
         $cliente = $parametros['cliente'];
-        $idMozo = $parametros['idMozo'];
+        $idMozo = $trabajador->id;
         $mesa = $parametros['mesa'];
-        $estado = $parametros['estado'];
+        $estado = "En preparación";
         $monto = 0;
         $alta = date("Y-m-d H:i:s");
         $entrega = "00-00-00 00:00:00";
