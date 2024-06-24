@@ -1,614 +1,13 @@
 {
 	"info": {
-		"_postman_id": "e308f003-305c-440f-8cb7-6ff9a92f6185",
-		"name": "La comanda",
+		"_postman_id": "f40250bb-c09a-4363-9bb2-348abdbe6506",
+		"name": "La Comanda",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13840858"
 	},
 	"item": [
 		{
-			"name": "localhost/lacomanda/app/pedidos",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/pedidos/listar",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"pedidos",
-						"listar"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/trabajadores/abm/bartenders",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/trabajadores/listar",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"trabajadores",
-						"listar"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/productos/listar",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost/lacomanda/app/productos/listar",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"productos",
-						"listar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/socios",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/socios/listar",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"socios",
-						"listar"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/mesas",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "nombre",
-							"value": "Socio1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-4-18",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "precio",
-							"value": "9000",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "codigo",
-							"value": "asd13",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "alta",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1234",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "mail",
-							"value": "socio1@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "cliente",
-							"value": "Martín",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "654jn",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "Disponible",
-							"type": "text"
-						},
-						{
-							"key": "monto",
-							"value": "10000",
-							"type": "text"
-						},
-						{
-							"key": "fechaAlta",
-							"value": "2024-06-01",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "tiempoFinal",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/mesas/listar",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"mesas",
-						"listar"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/bartenders/listar/pendientes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost/lacomanda/app/bartenders/listar/pendientes",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"bartenders",
-						"listar",
-						"pendientes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/mozos/cargar/pedido",
+			"name": "localhost/lacomanda/app/login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -616,117 +15,89 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "codigo",
-							"value": "ped01",
+							"key": "mail",
+							"value": "pg_2@gmail.com",
 							"type": "text"
 						},
 						{
-							"key": "cliente",
-							"value": "José",
-							"type": "text"
-						},
-						{
-							"key": "idMozo",
-							"value": "9",
-							"type": "text"
-						},
-						{
-							"key": "mesa",
-							"value": "55555",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "En proceso",
-							"type": "text"
-						},
-						{
-							"key": "mailTrabajador",
-							"value": "go.fe@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "passTrabajador",
-							"value": "ref123",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/mozos/cargar/pedido",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"mozos",
-						"cargar",
-						"pedido"
-					],
-					"query": [
-						{
-							"key": "sector",
-							"value": "choperas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/socios/cargar/trabajador",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "apellido",
-							"value": "Gomez",
-							"type": "text"
-						},
-						{
-							"key": "nombre",
-							"value": "Federico",
-							"type": "text"
-						},
-						{
-							"key": "fechaIngreso",
-							"value": "2024-5-15",
+							"key": "password",
+							"value": "123",
 							"type": "text"
 						},
 						{
 							"key": "puesto",
-							"value": "cocinero",
-							"type": "text"
-						},
-						{
-							"key": "clave",
-							"value": "123",
-							"type": "text"
-						},
-						{
-							"key": "mail",
-							"value": "go.fer@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "mailSocio",
-							"value": "pg_2@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "passSocio",
-							"value": "123456",
+							"value": "socio",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/socios/cargar/trabajador",
+					"raw": "localhost/lacomanda/app/login",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/socios/listar/socios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkwOTUwODksImV4cCI6MTcxOTE1NTA4OSwiYXVkIjoiZjI3NjQzYjM3M2IyMWJjMTc2OGMyNzkyZDg1ZjQ2OTQ1ODYxNzBjYyIsImRhdGEiOiJzb2NpbyIsImFwcCI6IlRlc3QgSldUIn0.NSoTSXMtb1JCSZTEzdERhLlFiGkDaNP141ZYEQmkiOQ\"",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/socios",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"socios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/socios/cargar/csv",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pedido",
+							"type": "file",
+							"src": "postman-cloud:///1ef310ce-85a3-4810-8a5b-e4dcede5ecfa"
+						},
+						{
+							"key": "objeto",
+							"value": "productos",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/csv",
 					"host": [
 						"localhost"
 					],
@@ -735,202 +106,145 @@
 						"app",
 						"socios",
 						"cargar",
-						"trabajador"
+						"csv"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/socios/cargar/mesa",
+			"name": "localhost/lacomanda/app/socios/descargar/csv",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
-							"key": "mailSocio",
-							"value": "pg_2@gmail.com",
+							"key": "objeto",
+							"value": "producto",
 							"type": "text"
-						},
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/descargar/csv",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"descargar",
+						"csv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/gestionPedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/gestionPedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"gestionPedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/lacomanda/app/mozo/cargar/pedido",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "passSocio",
-							"value": "123456",
-							"type": "text"
-						},
-						{
-							"key": "estado",
-							"value": "libre",
-							"type": "text"
-						},
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkxOTcyMDgsImV4cCI6MTcxOTc5NzIwOCwiYXVkIjoiZjI3NjQzYjM3M2IyMWJjMTc2OGMyNzkyZDg1ZjQ2OTQ1ODYxNzBjYyIsImlkIjoxMSwicHVlc3RvIjoibW96byIsImFwcCI6IkxhIENvbWFuZGEifQ.TC4jfqYOcmgCGpTLbq9l6x9TcB-BUljxYGm6OWfffJw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "codigo",
+							"value": "123as",
+							"type": "text"
+						},
+						{
+							"key": "cliente",
+							"value": "Jose",
+							"type": "text"
+						},
+						{
+							"key": "mesa",
 							"value": "55555",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/socios/cargar/mesa",
+					"raw": "localhost/lacomanda/app/mozo/cargar/pedido",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lacomanda",
 						"app",
-						"socios",
+						"mozo",
 						"cargar",
-						"mesa"
+						"pedido"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "localhost/lacomanda/app/socios/cargar/socio",
+			"name": "localhost/lacomanda/app/mozo/cargar/imagen",
 			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+				"auth": {
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "apellido",
-							"value": "socioI",
-							"type": "text"
-						},
-						{
-							"key": "nombre",
-							"value": "socioI",
-							"type": "text"
-						},
-						{
-							"key": "mail",
-							"value": "pg_2@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "clave",
-							"value": "123",
-							"type": "text"
-						},
-						{
-							"key": "mailSocio",
-							"value": "pg_2@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "passSocio",
-							"value": "123456",
-							"type": "text"
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkxOTcyMDgsImV4cCI6MTcxOTc5NzIwOCwiYXVkIjoiZjI3NjQzYjM3M2IyMWJjMTc2OGMyNzkyZDg1ZjQ2OTQ1ODYxNzBjYyIsImlkIjoxMSwicHVlc3RvIjoibW96byIsImFwcCI6IkxhIENvbWFuZGEifQ.TC4jfqYOcmgCGpTLbq9l6x9TcB-BUljxYGm6OWfffJw",
+							"type": "string"
 						}
 					]
 				},
-				"url": {
-					"raw": "localhost/lacomanda/app/socios/cargar/socio",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"socios",
-						"cargar",
-						"socio"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/socios/cargar/producto",
-			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "nombre",
-							"value": "Daikiri",
-							"type": "text"
-						},
-						{
-							"key": "precio",
-							"value": "4000",
-							"type": "text"
-						},
-						{
-							"key": "sector",
-							"value": "cocina",
-							"type": "text"
-						},
-						{
-							"key": "hayStock",
-							"value": "true",
-							"type": "text"
-						},
-						{
-							"key": "mail",
-							"value": "go.fe@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "passTrabajador",
-							"value": "ref123",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/socios/cargar/producto",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"socios",
-						"cargar",
-						"producto"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/mozo/cargar/pedidoProducto",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "pedido",
-							"value": "ped01",
+							"value": "123as",
 							"type": "text"
 						},
 						{
-							"key": "producto",
-							"value": "11",
-							"type": "text"
-						},
-						{
-							"key": "mailTrabajador",
-							"value": "go.fe@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "passTrabajador",
-							"value": "ref123",
-							"type": "text"
+							"key": "imagen",
+							"type": "file",
+							"src": "postman-cloud:///1ef16fe0-dd9b-4350-b2d4-4230c10ec11d"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lacomanda/app/mozo/cargar/pedidoProducto",
+					"raw": "localhost/lacomanda/app/mozo/cargar/imagen",
 					"host": [
 						"localhost"
 					],
@@ -939,147 +253,7 @@
 						"app",
 						"mozo",
 						"cargar",
-						"pedidoProducto"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/cerveceros/tomarProducto",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "mailTrabajador",
-							"value": "go.fer@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "id_pendiente",
-							"value": "8",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "5",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/cerveceros/tomarProducto",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"cerveceros",
-						"tomarProducto"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/cerveceros/tomarProducto",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "mailTrabajador",
-							"value": "go.fer@gmail.com",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "id_pendiente",
-							"value": "8",
-							"type": "text"
-						},
-						{
-							"key": "tiempoEstimado",
-							"value": "5",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/cerveceros/productoListo",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"cerveceros",
-						"productoListo"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/mozos/entregarPedido",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "codigo",
-							"value": "ped01",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lacomanda/app/mozo/entregarPedido",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"mozo",
-						"entregarPedido"
-					],
-					"query": [
-						{
-							"key": "codigo",
-							"value": "ped01",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/lacomanda/app/cerveceros/listar/pendientes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost/lacomanda/app/cerveceros/listar/pendientes",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lacomanda",
-						"app",
-						"cerveceros",
-						"listar",
-						"pendientes"
+						"imagen"
 					]
 				}
 			},
