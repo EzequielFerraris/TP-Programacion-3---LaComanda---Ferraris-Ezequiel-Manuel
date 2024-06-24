@@ -30,6 +30,7 @@ require_once './middleware/paramsSet/paramsSetPedidoProducto.php';
 require_once './middleware/paramsSet/paramsSetLogin.php';
 require_once './middleware/paramsSet/paramsSetCargarCSV.php';
 require_once './middleware/paramsSet/paramsSetDescargarCSV.php';
+require_once './middleware/paramsSet/paramsSetCargarImagen.php';
 
 //MIDDLEWARE CHECK PARAMETROS VALIDOS
 require_once './middleware/auth/authTrabajadorABM.php';
@@ -41,6 +42,7 @@ require_once './middleware/auth/authPedidoProductoABM.php';
 require_once './middleware/auth/authLogin.php';
 require_once './middleware/auth/authDescargarCSV.php';
 require_once './middleware/auth/authCargarCSV.php';
+require_once './middleware/auth/authCargarImagen.php';
 
 //MIDDLEWARE CHECK PERMISOS CON TOKEN JWT
 require_once './middleware/users/validarJWT.php';
@@ -71,7 +73,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
                                                                     ->add(new validarJWT("socio")); //chequea permisos
 
     //CARGAR UN TRABAJADOR 
-    $group->post('/cargar/trabajador', \trabajadoresController::class . ':CargarUno') ->add(new AuthTrabajadorABM()) //chequea tipos
+    $group->post('/cargar/trabajador', \trabajadoresController::class . ':CargarUno')->add(new AuthTrabajadorABM()) //chequea tipos
                                                                             ->add(new ParamsSetTrabajador()) //chequea si se pasaron los campos
                                                                             ->add(new validarJWT("socio")); //chequea permisos
 
@@ -111,8 +113,9 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
                                                                                             ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
                                                                                             ->add(new validarJWT("mozo"));
     //ASOCIAR IMAGEN A PEDIDO Y GUARDARLA
-    $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen');//->add(new validarJWT("mozo"));
-    //CARGAR UN PRODUCTO A UN PEDIDO                                                                                         //ENTREGAR UN PEDIDO 
+    $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen')->add(new AuthCargarImagen())
+                                                                            ->add(new ParamsSetCargarImagen());
+    //CARGAR UN PRODUCTO A UN PEDIDO                                          //->add(new validarJWT("mozo"));                             
     $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new validarJWT("mozo"));
     //COBRAR UN PEDIDO 
     $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new validarJWT("mozo"));

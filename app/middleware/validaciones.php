@@ -257,6 +257,18 @@ abstract class Validaciones
         return $result;
     }
     
+    public static function es_imagen($file) : bool
+    {
+        $csvMimes = array('image/jpeg', 'image/png');
+        $result = false;
+        if(in_array($file->getClientMediaType(), $csvMimes))
+        {
+            $result = true;
+        }
+        
+        return $result;
+    }
+
 }
 
 

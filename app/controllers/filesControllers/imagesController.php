@@ -1,6 +1,7 @@
 <?php
-use Psr\Http\Message\UploadedFileInterface;
 
+include_once "models/pedidos/pedido_imagen.php";
+use Psr\Http\Message\UploadedFileInterface;
 
 class ImagesController
 {
@@ -18,6 +19,11 @@ class ImagesController
 
         if($path != "")
         {
+            $registro = new pedido_imagen();
+            $registro->id_pedido = $id_pedido;
+            $registro->imagen_path = $path;
+            $registro->agregar();
+
             $payload = json_encode(array("mensaje" => "Imagen asociada correctamente"));
         }
         else 
@@ -28,7 +34,6 @@ class ImagesController
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
-
     }
 
     public static function moverArchivo(UploadedFileInterface $uploadedFile, string $id_pedido)
