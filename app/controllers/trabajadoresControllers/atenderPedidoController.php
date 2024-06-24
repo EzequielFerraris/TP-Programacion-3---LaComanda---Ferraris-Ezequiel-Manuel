@@ -9,26 +9,29 @@ class atenderPedidoController
 {
     public function TraerPendientes($request, $response, $args)
     {
-        $url = $request->getUri()->getPath();
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-        if(str_contains($url, "bartenders"))
-        {
-            $sector = "barra";
-        }
-        else if (str_contains($url, "cerveceros"))
-        {
-            $sector = "choperas";
-        }
-        else if (str_contains($url, "cocineros"))
-        {
-            $sector = "cocina";
-        }
-        else if (str_contains($url, "cocinerosCandybar"))
-        {
-            $sector = "candybar";
-        }
+        $puesto = AutentificadorJWT::ObtenerPuesto($token);
 
+        switch($puesto)
+        {
+            case "bartender":
+                $sector = "barra";
+            break;
+            case "cervecero":
+                $sector = "choperas";
+            break;
+            case "cocinero":
+                $sector = "cocina";
+            break;
+            case "cocineroCandybar":
+                $sector = "candybar";
+            break;
+        }
+        
         $lista = false;
+
         if(isset($sector)){$lista = Pedido_productos::obtenerPendientes($sector);} 
 
         if(!$lista === true)
@@ -40,7 +43,6 @@ class atenderPedidoController
             $payload = json_encode(array("listaProductos" => $lista));
         }
         
-
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -49,18 +51,21 @@ class atenderPedidoController
     public function TomarProductoPendiente($request, $response, $args)
     {
         $params = $request->getParsedBody();
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-        $trabajador = Trabajador::buscarPorMail($params["mailTrabajador"]);
+        $trabajador = Trabajador::buscarPorId(AutentificadorJWT::ObtenerID($token));
+
         $id_pedido_producto = $params["id_pendiente"];
         $tiempo_est_minutos = $params["tiempoEstimado"];
 
-        //MODIFICAR EL PEDIDO_PRODUCTO
+        //MODIFICAR EL PEDIDO_PRODUCTO A "EN PREPARACIÓN"
         $pedido_producto = Pedido_productos::buscarPorId($id_pedido_producto);
         $pedido_producto->estado = "En preparación";
         $pedido_producto->id_trabajador = $trabajador->id;
         $pedido_producto->tiempo_est_minutos = $tiempo_est_minutos;
 
-        //MODIFICAR EL TIEMPO ESTIMADO
+        //MODIFICAR EL TIEMPO ESTIMADO DE TODO EL PEDIDO EN BASE AL NUEVO ESTIMADO
         $tiempos = Pedido_productos::obtenerTiemposPorTrabajador($pedido_producto->id_pedido);
         $tiempoEstimado = $tiempos[0]["tiempo"];
 
@@ -70,7 +75,8 @@ class atenderPedidoController
 
         $pedido_producto->update();
 
-        $payload = json_encode(array("listaProductos" => $pedido));
+        //RESPONSE
+        $payload = json_encode(array("RESULTADO:" => "Producto seleccionado asignado. Tiempo estimado actualizado."));
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');

@@ -20,7 +20,7 @@ class LoginController
         {
             case "socio":
                 $socio = Socio::buscarPorMail($mail);
-                if ($socio->login($password)) {$validez = true;}
+                if ($socio->login($password)) {$validez = true; $idLog = $socio->id;}
             break;
             case "cervecero":
             case "bartender":
@@ -28,7 +28,7 @@ class LoginController
             case "cocineroCandybar":
             case "mozo":
                 $empleado = Trabajador::buscarPorMail($mail);
-                if ($empleado->login($password)) {$validez = true;}
+                if ($empleado->login($password)) {$validez = true; $idLog = $empleado->id;}
             break;
         }
 
@@ -36,7 +36,7 @@ class LoginController
         {
             try
             {
-                $token = AutentificadorJWT::CrearToken($puesto);
+                $token = AutentificadorJWT::CrearToken($puesto, $idLog);
                 $payload = json_encode(array('jwt' => $token));
             }
             catch(Exception $e)

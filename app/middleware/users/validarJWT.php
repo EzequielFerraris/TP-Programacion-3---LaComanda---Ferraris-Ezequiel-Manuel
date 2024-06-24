@@ -22,8 +22,13 @@ class validarJWT
         try 
         {
             AutentificadorJWT::VerificarToken($token);
-            $puestoToken = AutentificadorJWT::ObtenerData($token);
+            $puestoToken = AutentificadorJWT::ObtenerPuesto($token);
             if($puestoToken == $this->puesto) 
+            {
+                $response = $handler->handle($request);
+            }
+            else if($this->puesto == "trabajador" && Validaciones::es_puesto_valido($puestoToken)
+                    && $puestoToken  != "mozo")
             {
                 $response = $handler->handle($request);
             }
