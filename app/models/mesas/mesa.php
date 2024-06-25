@@ -52,10 +52,9 @@ class Mesa
     public function update()
     {
         $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("UPDATE mesas SET estado = :estado,
+        $consulta = $objAccesoDato->RetornarConsulta("UPDATE mesas SET estado = :estado
                                                     WHERE id = :id");
-        $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);                                               
-        $consulta->bindValue(':codigo', $this->codigo, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);                                               
         $consulta->bindValue(':estado', strval($this->estado), PDO::PARAM_STR);
         $consulta->execute();
     }

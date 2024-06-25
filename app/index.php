@@ -99,11 +99,17 @@ $app->group('/socios', function (RouteCollectorProxy $group)
 $app->group('/mozo', function (RouteCollectorProxy $group) 
 {
     //PETICIONES GET
-    //LISTAR
+    //LISTAR PEDIDOS POR SU ESTADO
     $group->get('/listar/pedidos', \mozosController::class . ':TraerPorEstado')->add(new validarJWT("mozo"));
+    //LISTAR PRODUCTOS POR PEDIDO
     $group->get('/listar/pedidos/productos', \mozosController::class . ':TraerPorPedido')->add(new validarJWT("mozo"));
 
     //PETICIONES POST
+    //CAMBIAR ESTADO MESA
+    $group->post('/estadoMesa', \MesasController::class . ':cambiarEstadoMesa')->add(new AuthMesaABM()) //chequea tipos
+                                                                                ->add(new ParamsSetMesa()) //chequea si se pasaron los campos
+                                                                                ->add(new validarJWT("mozo")); //chequea permisos
+
     //CARGAR UN PEDIDO 
     $group->post('/cargar/pedido', \PedidosController::class . ':CargarUno')->add(new AuthPedidoABM()) //chequea tipos
                                                                         ->add(new ParamsSetPedido()) //chequea si se pasaron los campos
@@ -114,8 +120,9 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
                                                                                             ->add(new validarJWT("mozo"));
     //ASOCIAR IMAGEN A PEDIDO Y GUARDARLA
     $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen')->add(new AuthCargarImagen())
-                                                                            ->add(new ParamsSetCargarImagen());
-    //CARGAR UN PRODUCTO A UN PEDIDO                                          //->add(new validarJWT("mozo"));                             
+                                                                            ->add(new ParamsSetCargarImagen())
+                                                                            ->add(new validarJWT("mozo"));
+    //CARGAR UN PRODUCTO A UN PEDIDO                                                                     
     $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new validarJWT("mozo"));
     //COBRAR UN PEDIDO 
     $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new validarJWT("mozo"));
@@ -135,5 +142,12 @@ $app->group('/gestionPedido', function (RouteCollectorProxy $group)
     
 });
 
+//RUTAS CLIENTES
+$app->group('/clientes', function (RouteCollectorProxy $group) 
+{
+    //PETICIONES GET
+    //PETICIONES POST
+    
+});
 
 $app->run();

@@ -64,6 +64,7 @@ class atenderPedidoController
         $pedido_producto->estado = "En preparación";
         $pedido_producto->id_trabajador = $trabajador->id;
         $pedido_producto->tiempo_est_minutos = $tiempo_est_minutos;
+        $pedido_producto->hora_tomado = date("Y-m-d H:i:s");
 
         //MODIFICAR EL TIEMPO ESTIMADO DE TODO EL PEDIDO EN BASE AL NUEVO ESTIMADO
         $tiempos = Pedido_productos::obtenerTiemposPorTrabajador($pedido_producto->id_pedido);
@@ -93,6 +94,9 @@ class atenderPedidoController
 
         $pedido_producto = Pedido_productos::buscarPorId($id_pedido_producto);
         $pedido_producto->estado = "Listo";
+        $pedido_producto->hora_completado = date("Y-m-d H:i:s");
+        $diferencia = abs(strtotime($pedido_producto->hora_tomado) - (new \DateTime)->getTimestamp()) / 60;
+        $pedido_producto->tiempo_tardado = $diferencia;
         $pedido_producto->update();
 
         //CHECKEA SI TODOS LOS PRODUCTOS DEL PEDIDO ESTÁN LISTOS
@@ -110,6 +114,5 @@ class atenderPedidoController
           ->withHeader('Content-Type', 'application/json');
     }
 }
-
 ?>
 

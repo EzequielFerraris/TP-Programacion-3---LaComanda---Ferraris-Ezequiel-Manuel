@@ -13,14 +13,19 @@ class mozosController
 
         $idPedido = $params["pedido"];
         $idProducto = $params["producto"];
+        $nombre_producto = Producto::buscarPorId($params["producto"])->nombre;
         $estado = "Sin asignar";
 
         $relacion = new Pedido_productos();
         $relacion->id_pedido = $idPedido;
+        $relacion->nombre_producto = $nombre_producto;
         $relacion->id_producto = $idProducto;
         $relacion->estado = $estado;
         $relacion->id_trabajador = null; 
         $relacion->tiempo_est_minutos = 0;
+        $relacion->hora_tomado = null;
+        $relacion->hora_completado = null;
+        $relacion->tiempo_tardado = 0;
 
         $resultadoQuery = $relacion->agregar();
         
@@ -45,9 +50,12 @@ class mozosController
 
     public function TraerPorEstado($request, $response, $args)
     {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
         $parametros = $request->getQueryParams();
 
-        $lista = Pedido::filtrarMozoEstado($parametros["mozo"], $parametros["estado"]); 
+        $lista = Pedido::filtrarMozoEstado(AutentificadorJWT::ObtenerID($token), $parametros["estado"]); 
 
         if(!$lista === true)
         {
@@ -72,7 +80,7 @@ class mozosController
 
         if(!$lista === true)
         {
-            $payload = json_encode(array("listaProductos" => "No se registran pedidos con ese estado."));
+            $payload = json_encode(array("listaProductos" => "No se registran productos para ese pedido."));
         }
         else
         {
@@ -100,7 +108,8 @@ class mozosController
         //CALCULAR CUÁNTO SE TARDÓ EN ENTREGAR EL PEDIDO
         $diferencia = abs(strtotime($pedido->alta) - (new \DateTime)->getTimestamp()) / 60;
         $pedido->tiempoFinal = $diferencia;
-        
+        $pedido->update();
+
         $payload = json_encode(array("mensaje" => "Pedido entregado."));
         $response->getBody()->write($payload);
         return $response

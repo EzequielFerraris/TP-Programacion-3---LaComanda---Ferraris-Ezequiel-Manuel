@@ -180,6 +180,7 @@ abstract class Validaciones
         {
             switch($par)
             {
+                case "socio":
                 case "cocinero":
                 case "cocineroCandybar":
                 case "bartender":

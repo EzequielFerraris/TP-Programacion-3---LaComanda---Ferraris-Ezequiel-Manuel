@@ -41,6 +41,25 @@ class MesasController extends Mesa implements ABM
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
+
+    public function cambiarEstadoMesa($request, $response, $args)
+    {
+        $parametros = $request->getParsedBody();
+
+        $codigo = $parametros['codigo'];
+        $estado = $parametros['estado'];
+        
+        // Creamos la mesa
+        $instancia = Mesa::buscar($codigo);      
+        $instancia->estado = $estado;
+        $instancia->update();
+
+        $payload = json_encode(array("mensaje" => "Mesa actualizada con éxito."));
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
     
 	public function TraerTodos($request, $response, $args)
     {
