@@ -59,10 +59,24 @@ class PedidosController extends Pedido implements ABM
 
     public function TraerUno($request, $response, $args)
     {
-        $codigo = $args['codigo'];
+        $params = $request->getQueryParams();
+        $codigo = $params['codigo'];
         
         $instancia = Pedido::buscar($codigo);
         $payload = json_encode($instancia);
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerDemoraPedido($request, $response, $args)
+    {
+        $params = $request->getQueryParams();
+        $codigo = $params['codigo'];
+        
+        $instancia = Pedido::buscar($codigo);
+        $payload = json_encode(array("Pedido " . $instancia->codigo => "Tiempo estimado demora: " . $instancia->tiempoEstimado));
 
         $response->getBody()->write($payload);
         return $response

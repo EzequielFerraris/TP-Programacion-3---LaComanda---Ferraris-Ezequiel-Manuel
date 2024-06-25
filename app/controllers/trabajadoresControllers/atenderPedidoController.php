@@ -65,7 +65,7 @@ class atenderPedidoController
         $pedido_producto->id_trabajador = $trabajador->id;
         $pedido_producto->tiempo_est_minutos = $tiempo_est_minutos;
         $pedido_producto->hora_tomado = date("Y-m-d H:i:s");
-
+        $pedido_producto->update();
         //MODIFICAR EL TIEMPO ESTIMADO DE TODO EL PEDIDO EN BASE AL NUEVO ESTIMADO
         $tiempos = Pedido_productos::obtenerTiemposPorTrabajador($pedido_producto->id_pedido);
         $tiempoEstimado = $tiempos[0]["tiempo"];
@@ -74,7 +74,7 @@ class atenderPedidoController
         $pedido->tiempoEstimado = (int)($tiempoEstimado);
         $pedido->update();
 
-        $pedido_producto->update();
+        
 
         //RESPONSE
         $payload = json_encode(array("RESULTADO:" => "Producto seleccionado asignado. Tiempo estimado actualizado."));

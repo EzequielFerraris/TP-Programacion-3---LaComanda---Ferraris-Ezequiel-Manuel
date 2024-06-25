@@ -65,82 +65,73 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/productos', \ProductosController::class . ':TraerTodos')->add(new validarJWT("socio"));
     $group->get('/listar/productos/{sector}', \ProductosController::class . ':TraerProductosPorSector')->add(new validarJWT("socio"));
     $group->get('/listar/pedidos', \PedidosController::class . ':TraerTodos')->add(new validarJWT("socio"));
+    $group->get('/listar/demoraPedido', \PedidosController::class . ':TraerDemoraPedido')->add(new validarJWT("socio"));
 
     //PETICIOS POST
     //CARGAR UN SOCIO 
     $group->post('/cargar/socio', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) //chequea tipos
-                                                                    ->add(new ParamsSetSocio()) //chequea si se pasaron los campos
-                                                                    ->add(new validarJWT("socio")); //chequea permisos
-
+                                                                    ->add(new ParamsSetSocio()); //chequea si se pasaron los campos
     //CARGAR UN TRABAJADOR 
     $group->post('/cargar/trabajador', \trabajadoresController::class . ':CargarUno')->add(new AuthTrabajadorABM()) //chequea tipos
-                                                                            ->add(new ParamsSetTrabajador()) //chequea si se pasaron los campos
-                                                                            ->add(new validarJWT("socio")); //chequea permisos
-
+                                                                            ->add(new ParamsSetTrabajador()); //chequea si se pasaron los campos
     //CARGAR UN PRODUCTO 
     $group->post('/cargar/producto', \ProductosController::class . ':CargarUno')->add(new AuthProductoABM()) //chequea tipos
-                                                                        ->add(new ParamsSetProducto())
-                                                                        ->add(new validarJWT("socio")); //chequea permisos
+                                                                        ->add(new ParamsSetProducto());
     //CARGAR UNA MESA 
     $group->post('/cargar/mesa', \MesasController::class . ':CargarUno')->add(new AuthMesaABM()) //chequea tipos
-                                                                    ->add(new ParamsSetMesa())  //chequea si se pasaron los campos
-                                                                    ->add(new validarJWT("socio")); //chequea permisos
+                                                                    ->add(new ParamsSetMesa());  //chequea si se pasaron los campos;
+    //CAMBIAR ESTADO MESA
+    $group->post('/estadoMesa', \MesasController::class . ':cambiarEstadoMesa')->add(new AuthMesaABM()) //chequea tipos
+                                                                                ->add(new ParamsSetMesa()); //chequea si se pasaron los campos
     //CARGAR CSV
     $group->post('/cargar/csv', \CsvController::class . ':guardarCSV')->add(new AuthCargarCSV()) //chequea tipos
-                                                                    ->add(new ParamsSetCargarCSV())  //chequea si se pasaron los campos
-                                                                    ->add(new validarJWT("socio")); //chequea permisos
+                                                                    ->add(new ParamsSetCargarCSV());  //chequea si se pasaron los campos;
     //DESCARGAR CSV 
     $group->post('/descargar/csv', \CsvController::class . ':descargarCSV')->add(new AuthDescargarCSV()) //chequea tipos
-                                                                        ->add(new ParamsSetDescargarCSV())  //chequea si se pasaron los campos
-                                                                        ->add(new validarJWT("socio")); //chequea permisos
-});                     
+                                                                        ->add(new ParamsSetDescargarCSV());  //chequea si se pasaron los campos
+})->add(new validarJWT("socio"));                     
 
 //RUTAS MOZOS
 $app->group('/mozo', function (RouteCollectorProxy $group) 
 {
     //PETICIONES GET
     //LISTAR PEDIDOS POR SU ESTADO
-    $group->get('/listar/pedidos', \mozosController::class . ':TraerPorEstado')->add(new validarJWT("mozo"));
+    $group->get('/listar/pedidos', \mozosController::class . ':TraerPorEstado');
     //LISTAR PRODUCTOS POR PEDIDO
-    $group->get('/listar/pedidos/productos', \mozosController::class . ':TraerPorPedido')->add(new validarJWT("mozo"));
+    $group->get('/listar/pedidos/productos', \mozosController::class . ':TraerPorPedido');
 
     //PETICIONES POST
     //CAMBIAR ESTADO MESA
     $group->post('/estadoMesa', \MesasController::class . ':cambiarEstadoMesa')->add(new AuthMesaABM()) //chequea tipos
-                                                                                ->add(new ParamsSetMesa()) //chequea si se pasaron los campos
-                                                                                ->add(new validarJWT("mozo")); //chequea permisos
-
+                                                                                ->add(new ParamsSetMesa()); //chequea si se pasaron los campos                                                                        
     //CARGAR UN PEDIDO 
     $group->post('/cargar/pedido', \PedidosController::class . ':CargarUno')->add(new AuthPedidoABM()) //chequea tipos
-                                                                        ->add(new ParamsSetPedido()) //chequea si se pasaron los campos
-                                                                        ->add(new validarJWT("mozo")); //chequea permisos
+                                                                        ->add(new ParamsSetPedido()); //chequea si se pasaron los campos                                                        
     //CARGAR UN PRODUCTO A UN PEDIDO 
     $group->post('/cargar/pedidoProducto', \mozosController::class . ':cargarProductoEnPedido')->add(new AuthPedidoProductoABM()) //chequea tipos
-                                                                                            ->add(new ParamsSetPedidoProducto()) //chequea si se pasaron los campos
-                                                                                            ->add(new validarJWT("mozo"));
+                                                                                            ->add(new ParamsSetPedidoProducto()); //chequea si se pasaron los campos                                                                                     
     //ASOCIAR IMAGEN A PEDIDO Y GUARDARLA
     $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen')->add(new AuthCargarImagen())
-                                                                            ->add(new ParamsSetCargarImagen())
-                                                                            ->add(new validarJWT("mozo"));
+                                                                            ->add(new ParamsSetCargarImagen());                                                                       
     //CARGAR UN PRODUCTO A UN PEDIDO                                                                     
-    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new validarJWT("mozo"));
+    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado');
     //COBRAR UN PEDIDO 
-    $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new validarJWT("mozo"));
-});
+    $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido');
+})->add(new validarJWT("mozo"));
 
 //RUTAS COCINEROS, BARTENDERS, CERVECEROS, CANDYBAR
 $app->group('/gestionPedido', function (RouteCollectorProxy $group) 
 {
     //PETICIONES GET
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
-    $group->get('/pendientes', \atenderPedidoController::class . ':TraerPendientes')->add(new validarJWT("trabajador"));
+    $group->get('/pendientes', \atenderPedidoController::class . ':TraerPendientes');
     //PETICIONES POST
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
-    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new validarJWT("trabajador"));
+    $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente');
     //MARCAR PRODUCTO COMO LISTO
-    $group->post('/marcarListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new validarJWT("trabajador"));
+    $group->post('/marcarListo', \atenderPedidoController::class . ':MarcarProductoListo');
     
-});
+})->add(new validarJWT("trabajador"));
 
 //RUTAS CLIENTES
 $app->group('/clientes', function (RouteCollectorProxy $group) 
