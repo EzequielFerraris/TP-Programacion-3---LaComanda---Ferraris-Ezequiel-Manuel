@@ -243,6 +243,26 @@ abstract class Validaciones
         return $result;
     }
 
+    public static function es_mesa_estado(string $par) : bool
+    {
+        $result = false;
+        if(Validaciones::es_letras($par))
+        {
+            switch($par)
+            {
+                case "libre":
+                case "con cliente esperando pedido":
+                case "con cliente comiendo":
+                case "con cliente pagando":
+                case "cerrada":
+                    $result = true;
+                break;   
+            }
+        }
+        
+        return $result;
+    }
+
     public static function es_csv($file) : bool
     {
         $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 
@@ -270,6 +290,50 @@ abstract class Validaciones
         return $result;
     }
 
+    public static function es_rating_valido(int $par) : bool
+    {
+        $result = false;
+
+        if(filter_var($par, FILTER_VALIDATE_INT) === 0 || !filter_var($par, FILTER_VALIDATE_INT) === false)
+        {
+            if($par > 0 && $par < 11)
+            {
+                $result = true;
+            }
+        }
+        return $result;
+    }
+   
+    public static function es_comentario_valido(string $par) : bool
+    {
+        $result = false;
+
+        if(preg_match("/^[a-zA-Z1-9 áéíóúAÉÍÓÚÑñ\s,\.]+$/", $par) && strlen($par) > 0 && strlen($par) < 66)
+        {
+            $result = true;
+        }
+
+        return $result;
+    }
+
+    public static function es_categoria_validacion(string $par) : bool
+    {
+        $result = false;
+        if(Validaciones::es_letras($par))
+        {
+            switch($par)
+            {
+                case "cocinero":
+                case "restaurante":
+                case "mozo":
+                case "mesa":
+                    $result = true;
+                break;   
+            }
+        }
+        
+        return $result;
+    }
 }
 
 

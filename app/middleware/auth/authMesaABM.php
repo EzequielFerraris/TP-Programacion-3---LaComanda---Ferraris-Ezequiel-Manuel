@@ -10,13 +10,26 @@ class AuthMesaABM
     public function __invoke(Request $request, RequestHandler $handler): Response
     {   
         $parametros = $request->getParsedBody();
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+        $puesto = AutentificadorJWT::ObtenerPuesto($token);
 
         $codigo = $parametros['codigo'];
         $estado = $parametros['estado'];
 
-        if(Validaciones::es_alfanumerico($codigo) && Validaciones::es_letras($estado))
+        if(Validaciones::es_alfanumerico($codigo) && Validaciones::es_mesa_estado($estado))
         {
-            $response = $handler->handle($request);
+            if($estado == "cerrada" && $puesto == "mozo")
+            {
+                $response = new Response();
+                $payload = json_encode(array('mensaje' => 'Los mozos no pueden cerrar mesas.'));
+                $response->getBody()->write($payload);
+            }
+            else
+            {
+                $response = $handler->handle($request);
+            }
         } 
         else 
         {
@@ -27,7 +40,6 @@ class AuthMesaABM
 
         return $response->withHeader('Content-Type', 'application/json');
     }
-
 
 }
 

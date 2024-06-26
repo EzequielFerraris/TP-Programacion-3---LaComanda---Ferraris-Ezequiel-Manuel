@@ -76,7 +76,12 @@ class PedidosController extends Pedido implements ABM
         $codigo = $params['codigo'];
         
         $instancia = Pedido::buscar($codigo);
-        $payload = json_encode(array("Pedido " . $instancia->codigo => "Tiempo estimado demora: " . $instancia->tiempoEstimado));
+
+        if(empty($instancia->tiempoEstimado)) {$instancia->tiempoEstimado = "En proceso de estimar tiempo de entrega.";}
+
+        $payload = json_encode(array("Pedido" => $instancia->codigo, 
+                                    "Mesa" => $instancia->mesa,
+                                    "Tiempo estimado demora" => $instancia->tiempoEstimado));
 
         $response->getBody()->write($payload);
         return $response
