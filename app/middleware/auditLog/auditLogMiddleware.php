@@ -40,6 +40,10 @@ class AuditLogMiddleware
             $nueva_entrada->accion = $paramsDevueltos->accion;
             $nueva_entrada->fecha = date("Y-m-d H:i:s");
             $nueva_entrada->crear();
+
+            $payload = json_encode(array('Mensaje' => $paramsDevueltos->Mensaje));
+            $response = new Response();
+            $response->getBody()->write($payload);
         }
         else
         {
@@ -67,8 +71,6 @@ class AuditLogMiddleware
                 }
                 $nueva_entrada->fecha = date("Y-m-d H:i:s");
                 $nueva_entrada->crear();
-                
-                return $response;
             }
             else
             {

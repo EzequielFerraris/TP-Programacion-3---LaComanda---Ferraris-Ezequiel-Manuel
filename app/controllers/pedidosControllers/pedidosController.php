@@ -165,6 +165,32 @@ class PedidosController extends Pedido implements ABM
 
         return $resultado;
     }
+
+    public static function fueraDeTiempo($request, $response, $args)
+    {
+        $pedidos = Pedido::obtenerTodos();
+
+        $pedidosTarget = array();
+
+        foreach($pedidos as $p)
+        {
+            if($p->tiempoEstimado < $p->tiempoFinal)
+            {
+                $resumen = array("Pedido" => $p->codigo, "Mesa" =>$p->mesa, 
+                                "Tiempo estimado" => $p->tiempoEstimado, "Tiempo tardado" => $p->tiempoFinal);
+                array_push($pedidosTarget, $resumen);
+            }
+        }
+
+        $payload = json_encode(array('Mensaje'=> $pedidosTarget, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar pedidos entregados fuera de tiempo'));
+                                    
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+
+    }
 }
 
 ?>

@@ -69,6 +69,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/mejoresComentarios', \EncuestaController::class . ':TraerMejoresValoraciones')->add(new AuthCategoriaEncuesta())
                                                                                                         ->add(new ParamsSet(["categoria"]));
     $group->get('/listar/mesaMasUsada', \MesasController::class . ':mesaMasUsada');
+    $group->get('/listar/fueraDeTiempo', \PedidosController::class . ':fueraDeTiempo');
 
     //PETICIOS POST
     //CARGAR UN SOCIO 
