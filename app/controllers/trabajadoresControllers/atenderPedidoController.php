@@ -36,11 +36,15 @@ class atenderPedidoController
 
         if(!$lista === true)
         {
-            $payload = json_encode(array("listaProductos" => "No se registran pendientes."));
+            $payload = json_encode(array('Mensaje'=> 'No se registran productos pendientes.', 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos pendientes'));
         }
         else
         {
-            $payload = json_encode(array("listaProductos" => $lista));
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos pendientes'));
         }
         
         $response->getBody()->write($payload);
@@ -74,10 +78,11 @@ class atenderPedidoController
         $pedido->tiempoEstimado = (int)($tiempoEstimado);
         $pedido->update();
 
-        
-
         //RESPONSE
-        $payload = json_encode(array("RESULTADO:" => "Producto seleccionado asignado. Tiempo estimado actualizado."));
+        $payload = json_encode(array('Mensaje'=> 'Producto seleccionado asignado. Tiempo estimado actualizado.', 
+                                    'resultado' => true,
+                                    'accion'=>'Tomar producto pendiente para completar'));
+
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -108,7 +113,10 @@ class atenderPedidoController
             $producto->update();
         }
 
-        $payload = json_encode(array("listaProductos" => "Producto marcado como listo."));
+        $payload = json_encode(array('Mensaje'=> 'Producto marcado como listo.', 
+                                    'resultado' => true,
+                                    'accion'=>'Marcar producto como listo'));
+
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');

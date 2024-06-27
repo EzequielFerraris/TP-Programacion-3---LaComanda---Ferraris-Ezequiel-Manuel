@@ -21,7 +21,7 @@ class EncuestaController
 
         $instancia->crear();
 
-        $payload = json_encode(array("mensaje" => "Encuesta agregada con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Encuesta agregada con éxito'));
 
         $response->getBody()->write($payload);
         return $response
@@ -37,7 +37,9 @@ class EncuestaController
 
         if(empty($instancia)) 
         {
-            $payload = json_encode(array("Valoraciones" => "No se registran opiniones."));
+            $payload = json_encode(array('Mensaje'=> 'No se registran opiniones.', 
+                                        'resultado' => true,
+                                        'accion'=>'Obtener valoraciones encuesta'));
         }
         else
         {
@@ -68,8 +70,9 @@ class EncuestaController
                 $r["comentario"] = $e->comentario; 
                 array_push($respuesta, $r);
             }
-            
-            $payload = json_encode($respuesta);
+            $payload = json_encode(array('Mensaje'=> $respuesta, 
+                                        'resultado' => true,
+                                        'accion'=>'Obtener valoraciones encuesta'));
         }
 
         $response->getBody()->write($payload);

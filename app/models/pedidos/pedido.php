@@ -99,6 +99,17 @@ class Pedido
 
         return $consulta->fetchObject('Pedido');
     }
+
+    public static function mesaMasPedidos($mesa)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT mesa, COUNT(codigo) as pedidos FROM pedidos 
+                                                        GROUP BY mesa DESC LIMIT 1");
+        $consulta->bindValue(':mesa', $mesa, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

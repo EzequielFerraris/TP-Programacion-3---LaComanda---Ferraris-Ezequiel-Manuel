@@ -40,7 +40,9 @@ class PedidosController extends Pedido implements ABM
         
         $instancia->crear();
 
-        $payload = json_encode(array("mensaje" => "Pedido agregado con éxito"));
+        $payload = json_encode(array('Mensaje'=> "Pedido agregado con éxito", 
+                                    'resultado' => true,
+                                    'accion'=>'Crear pedido'));
 
         $response->getBody()->write($payload);
         return $response
@@ -50,7 +52,10 @@ class PedidosController extends Pedido implements ABM
 	public function TraerTodos($request, $response, $args)
     {
         $lista = Pedido::obtenerTodos();
-        $payload = json_encode(array("listaPedidos" => $lista));
+
+        $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar todos los pedidos'));
 
         $response->getBody()->write($payload);
         return $response
@@ -63,7 +68,9 @@ class PedidosController extends Pedido implements ABM
         $codigo = $params['codigo'];
         
         $instancia = Pedido::buscar($codigo);
-        $payload = json_encode($instancia);
+        $payload = json_encode(array('Mensaje'=> json_encode($instancia), 
+                                    'resultado' => true,
+                                    'accion'=>'Buscar un pedido'));
 
         $response->getBody()->write($payload);
         return $response
@@ -79,9 +86,12 @@ class PedidosController extends Pedido implements ABM
 
         if(empty($instancia->tiempoEstimado)) {$instancia->tiempoEstimado = "En proceso de estimar tiempo de entrega.";}
 
-        $payload = json_encode(array("Pedido" => $instancia->codigo, 
-                                    "Mesa" => $instancia->mesa,
-                                    "Tiempo estimado demora" => $instancia->tiempoEstimado));
+        $payload = json_encode(array('Mensaje'=> array("Pedido" => $instancia->codigo, 
+                                                    "Mesa" => $instancia->mesa,
+                                                    "Tiempo estimado demora" => $instancia->tiempoEstimado), 
+                                    'resultado' => true,
+                                    'accion'=>'Consultar demora pedido'));
+
 
         $response->getBody()->write($payload);
         return $response
@@ -110,7 +120,10 @@ class PedidosController extends Pedido implements ABM
          
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Pedido modificado con exito"));
+
+        $payload = json_encode(array('Mensaje'=> "Pedido modificado con exito", 
+                                    'resultado' => true,
+                                    'accion'=>'Modificar pedido'));
 
         $response->getBody()->write($payload);
         return $response
@@ -127,8 +140,10 @@ class PedidosController extends Pedido implements ABM
         $Pedido->estado = "cancelado";
         $Pedido->update();
 
-        $payload = json_encode(array("mensaje" => "Pedido cancelado con éxito"));
-
+        $payload = json_encode(array('Mensaje'=> "Pedido cancelado con éxito", 
+                                    'resultado' => true,
+                                    'accion'=>'Cancelar pedido'));
+                                    
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');

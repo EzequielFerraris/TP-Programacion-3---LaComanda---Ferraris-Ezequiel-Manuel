@@ -24,11 +24,15 @@ class ImagesController
             $registro->imagen_path = $path;
             $registro->agregar();
 
-            $payload = json_encode(array("mensaje" => "Imagen asociada correctamente"));
+            $payload = json_encode(array('Mensaje'=> "Imagen asociada correctamente", 
+                                        'resultado' => true,
+                                        'accion'=>'Asociar imagen'));
         }
         else 
         {
-            $payload = json_encode(array("mensaje" => "La imagen no pudo cargarse"));
+            $payload = json_encode(array('Mensaje'=> "La imagen no pudo cargarse", 
+                                        'resultado' => true,
+                                        'accion'=>'Asociar imagen'));
         }
 
         $response->getBody()->write($payload);

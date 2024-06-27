@@ -22,7 +22,9 @@ class ProductosController extends Producto implements ABM
         $instancia->hayStock = $hayStock;
         $instancia->crear();
 
-        $payload = json_encode(array("mensaje" => "Producto agregado con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Producto agregado con éxito', 
+                                    'resultado' => true,
+                                    'accion'=>'Agregar producto'));
 
         $response->getBody()->write($payload);
         return $response
@@ -32,7 +34,10 @@ class ProductosController extends Producto implements ABM
 	public function TraerTodos($request, $response, $args)
     {
         $lista = Producto::obtenerTodos();
-        $payload = json_encode(array("listaProductos" => $lista));
+
+        $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos'));
 
         $response->getBody()->write($payload);
         return $response
@@ -55,7 +60,10 @@ class ProductosController extends Producto implements ABM
         $id = $args['id'];
         
         $instancia = Producto::buscarPorId($id);
-        $payload = json_encode($instancia);
+
+        $payload = json_encode(array('Mensaje'=> json_encode($instancia), 
+                                    'resultado' => true,
+                                    'accion'=>'Buscar un producto'));
 
         $response->getBody()->write($payload);
         return $response
@@ -77,7 +85,9 @@ class ProductosController extends Producto implements ABM
          
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Producto modificado con exito"));
+        $payload = json_encode(array('Mensaje'=> 'Producto modificado con exito', 
+                                    'resultado' => true,
+                                    'accion'=>'Modificar un producto'));
 
         $response->getBody()->write($payload);
         return $response
@@ -94,7 +104,9 @@ class ProductosController extends Producto implements ABM
         $trabajador->hayStock = false;
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Producto sin stock actualizado con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Producto marcado como sin stock', 
+                                    'resultado' => true,
+                                    'accion'=>'Marcar producto sin stock'));
 
         $response->getBody()->write($payload);
         return $response

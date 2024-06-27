@@ -36,18 +36,21 @@ class LoginController
         {
             try
             {
-                $token = AutentificadorJWT::CrearToken($puesto, $idLog);
-                $payload = json_encode(array('jwt' => $token));
+                $token = AutentificadorJWT::CrearToken($puesto, $idLog, $mail);
+                $payload = json_encode(array('Mensaje'=> $token,
+                                            'jwt' => $token,  
+                                            'resultado' => true,
+                                            'accion'=>'Login exitoso'));
             }
             catch(Exception $e)
             {
-                $payload = json_encode(array('Error' => $e->getMessage()));
+                $payload = json_encode(array('Mensaje' => $e->getMessage()));
             }
 
         }
         else
         {
-            $payload = json_encode(array('Error' => "Alguno de los parámetros es incorrecto."));
+            $payload = json_encode(array('Mensaje' => "Alguno de los parámetros es incorrecto."));
         }
         
         $response->getBody()->write($payload);

@@ -31,14 +31,18 @@ class mozosController
         
         if($resultadoQuery)
         {
-            $payload = json_encode(array("mensaje" => "Producto agregado con éxito"));
+            $payload = json_encode(array('Mensaje'=> 'Producto asignado a pedido correctamente.', 
+                                        'resultado' => true,
+                                        'accion'=>'Asignar producto a pedido'));
 
             $response->getBody()->write($payload);
             
         }
         else
         {
-            $payload = json_encode(array("mensaje" => "No se pudo agregar el producto."));
+            $payload = json_encode(array('Mensaje'=> 'No se pudo agregar el producto.', 
+                                        'resultado' => true,
+                                        'accion'=>'Asignar producto a pedido'));
 
             $response->getBody()->write($payload);
             
@@ -59,14 +63,17 @@ class mozosController
 
         if(!$lista === true)
         {
-            $payload = json_encode(array("listaProductos" => "No se registran pedidos con ese estado."));
+            $payload = json_encode(array('Mensaje'=> 'No se registran pedidos con ese estado.', 
+                                        'resultado' => true,
+                                        'accion'=>'Buscar pedidos por estado'));
         }
         else
         {
-            $payload = json_encode(array("listaProductos" => $lista));
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                        'resultado' => true,
+                                        'accion'=>'Buscar pedidos por estado'));
         }
         
-
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -80,14 +87,17 @@ class mozosController
 
         if(!$lista === true)
         {
-            $payload = json_encode(array("listaProductos" => "No se registran productos para ese pedido."));
+            $payload = json_encode(array('Mensaje'=> 'No se registran productos para ese pedido.', 
+                                        'resultado' => true,
+                                        'accion'=>'Buscar productos por pedido'));
         }
         else
         {
-            $payload = json_encode(array("listaProductos" => $lista));
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                        'resultado' => true,
+                                        'accion'=>'Buscar productos por pedido'));
         }
         
-
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -110,7 +120,10 @@ class mozosController
         $pedido->tiempoFinal = $diferencia;
         $pedido->update();
 
-        $payload = json_encode(array("mensaje" => "Pedido entregado."));
+        $payload = json_encode(array('Mensaje'=> 'Pedido entregado', 
+                                        'resultado' => true,
+                                        'accion'=>'Entregar pedido'));
+
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -129,7 +142,10 @@ class mozosController
         $pedido->monto = (float)$monto;
         $pedido->update();
 
-        $payload = json_encode(array("Monto a pagar:" => $pedido->monto));
+        $payload = json_encode(array('Mensaje'=> 'Monto a pagar: $' . $pedido->monto, 
+                                        'resultado' => true,
+                                        'accion'=>'Entregar pedido'));
+
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');

@@ -46,7 +46,9 @@ class trabajadoresController extends Trabajador implements ABM
         $trabajador->encriptar();
         $trabajador->crear();
 
-        $payload = json_encode(array("mensaje" => "Trabajador agregado con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Trabajador agregado con éxito', 
+                                        'resultado' => true,
+                                        'accion'=>'Agregar trabajador'));
 
         $response->getBody()->write($payload);
         return $response
@@ -56,7 +58,10 @@ class trabajadoresController extends Trabajador implements ABM
 	public function TraerTodos($request, $response, $args)
     {
         $lista = Trabajador::obtenerTodos();
-        $payload = json_encode(array("listaTrabajadores" => $lista));
+
+        $payload = json_encode(array('Mensaje'=> $lista, 
+                                        'resultado' => true,
+                                        'accion'=>'Listar trabajadores'));
 
         $response->getBody()->write($payload);
         return $response
@@ -69,14 +74,16 @@ class trabajadoresController extends Trabajador implements ABM
         $apellido = $args['apellido'];
         $nombre = $args['nombre'];
         $trabajador = Trabajador::buscar($apellido, $nombre);
-        $payload = json_encode($trabajador);
+        $payload = json_encode(array('Mensaje'=> $trabajador, 
+                                        'resultado' => true,
+                                        'accion'=>'Buscar un trabajador'));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
 
-    
+    /**** */
 	public function DarBajaUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -87,7 +94,9 @@ class trabajadoresController extends Trabajador implements ABM
         $trabajador->estado = "baja";
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Trabajador dado de baja con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Trabajador dado de baja con éxito', 
+                                        'resultado' => true,
+                                        'accion'=>'Dar de baja un trabajador'));
 
         $response->getBody()->write($payload);
         return $response
@@ -110,7 +119,9 @@ class trabajadoresController extends Trabajador implements ABM
          
         $trabajador->update();
 
-        $payload = json_encode(array("mensaje" => "Trabajador modificado con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Estado de trabajador cambiado con éxito', 
+                                        'resultado' => true,
+                                        'accion'=>'Cambiar estado trabajador'));
 
         $response->getBody()->write($payload);
         return $response

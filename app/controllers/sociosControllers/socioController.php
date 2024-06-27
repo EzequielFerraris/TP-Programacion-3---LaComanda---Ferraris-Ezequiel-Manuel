@@ -22,7 +22,9 @@ class SocioController
         $instancia->encriptar();
         $instancia->crear();
 
-        $payload = json_encode(array("mensaje" => "Socio agregado con éxito"));
+        $payload = json_encode(array('Mensaje'=> 'Socio agregado con éxito', 
+                                    'resultado' => true,
+                                    'accion'=>'Agregar socio'));
 
         $response->getBody()->write($payload);
         return $response
@@ -33,7 +35,10 @@ class SocioController
     public function TraerTodos($request, $response, $args)
     {
         $lista = Socio::obtenerTodos();
-        $payload = json_encode(array("listaSocios" => $lista));
+
+        $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar socios'));
 
         $response->getBody()->write($payload);
         return $response

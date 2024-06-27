@@ -9,7 +9,7 @@ class AutentificadorJWT
     private static $tipoEncriptacion = 'HS256';
 
     
-    public static function CrearToken($puesto, $id)
+    public static function CrearToken($puesto, $id, $mail)
     {
         $ahora = time();
         $payload = array(
@@ -17,6 +17,7 @@ class AutentificadorJWT
             'exp' => $ahora + (600000000000000000),
             'aud' => self::Aud(),
             'id' => $id,
+            'mail'=> $mail,
             'puesto' => $puesto,
             'app' => "La Comanda"
         );

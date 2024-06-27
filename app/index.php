@@ -41,6 +41,8 @@ require_once './middleware/auth/authCargarImagen.php';
 require_once './middleware/auth/authEncuesta.php';
 require_once './middleware/auth/authCategoriaEncuesta.php';
 
+require_once './middleware/auditLog/auditLogMiddleware.php';
+
 //MIDDLEWARE CHECK PERMISOS CON TOKEN JWT
 require_once './middleware/users/validarJWT.php';
 
@@ -51,7 +53,8 @@ $app->setBasePath('/lacomanda/app');
 
 //DEFAULT LOGIN
 $app->post('/login', \LoginController::class . ':login')->add(new AuthLogin()) //chequea tipos
-                                                        ->add(new ParamsSet(["mail", "password", "puesto"])); //chequea si se pasaron los campos 
+                                                        ->add(new ParamsSet(["mail", "password", "puesto"])) //chequea si se pasaron los campos 
+                                                        ->add(new AuditLogMiddleware());
 //RUTAS SOCIOS
 $app->group('/socios', function (RouteCollectorProxy $group) 
 {
@@ -65,6 +68,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/demoraPedido', \PedidosController::class . ':TraerDemoraPedido')->add(new ParamsSet(["codigo"]));
     $group->get('/listar/mejoresComentarios', \EncuestaController::class . ':TraerMejoresValoraciones')->add(new AuthCategoriaEncuesta())
                                                                                                         ->add(new ParamsSet(["categoria"]));
+    $group->get('/listar/mesaMasUsada', \MesasController::class . ':mesaMasUsada');
     //PETICIOS POST
     //CARGAR UN SOCIO 
     $group->post('/cargar/socio', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) 
@@ -87,7 +91,8 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     //DESCARGAR CSV 
     $group->post('/descargar/csv', \CsvController::class . ':descargarCSV')->add(new AuthDescargarCSV()) 
                                                                         ->add(new ParamsSetDescargarCSV());  
-})->add(new validarJWT("socio"));                     
+})->add(new AuditLogMiddleware())
+->add(new validarJWT("socio"));                     
 
 //RUTAS MOZOS
 $app->group('/mozo', function (RouteCollectorProxy $group) 
@@ -115,7 +120,8 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
     $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new ParamsSet(["codigo", "estado"]));
     //COBRAR UN PEDIDO 
     $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new ParamsSet(["codigo"]));
-})->add(new validarJWT("mozo"));
+})->add(new AuditLogMiddleware())
+->add(new validarJWT("mozo"));
 
 //RUTAS COCINEROS, BARTENDERS, CERVECEROS, CANDYBAR
 $app->group('/gestionPedido', function (RouteCollectorProxy $group) 
@@ -129,7 +135,8 @@ $app->group('/gestionPedido', function (RouteCollectorProxy $group)
     //MARCAR PRODUCTO COMO LISTO
     $group->post('/marcarListo', \atenderPedidoController::class . ':MarcarProductoListo')->add(new ParamsSet(["id_pendiente"])); 
     
-})->add(new validarJWT("trabajador"));
+})->add(new AuditLogMiddleware())
+->add(new validarJWT("trabajador"));
 
 //RUTAS CLIENTES
 $app->group('/clientes', function (RouteCollectorProxy $group) 
@@ -140,6 +147,6 @@ $app->group('/clientes', function (RouteCollectorProxy $group)
     //PETICIONES POST
     $group->post('/cargarEncuesta', \EncuestaController::class . ':guardarEncuesta')->add(new AuthEncuesta())
                 ->add(new ParamsSet(["nombre_cliente", "mesa", "pedido", "cocinero_rating", "restaurante_rating", "mozo_rating", "mesa_rating", "comentario"]));
-});
+})->add(new AuditLogMiddleware());
 
 $app->run();

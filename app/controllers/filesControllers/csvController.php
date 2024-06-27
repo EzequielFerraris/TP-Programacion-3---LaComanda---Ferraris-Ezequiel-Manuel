@@ -42,16 +42,22 @@ class CsvController
                     break;
                 }
 
-                $payload = json_encode(array("mensaje" => $resultado));
+                $payload = json_encode(array('Mensaje'=> $resultado, 
+                                        'resultado' => true,
+                                        'accion'=>'Descargar csv'));
             }
             catch(Exception $e)
             {
-                $payload = json_encode(array("mensaje" => $e->getMessage()));
+                $payload = json_encode(array('Mensaje'=> $e->getMessage(), 
+                                        'resultado' => true,
+                                        'accion'=>'Descargar csv'));
             }
         }
         else 
         {
-            $payload = json_encode(array("mensaje" => "El archivo no se pudo guardar correctamente."));
+            $payload = json_encode(array('Mensaje'=> "El archivo no se pudo guardar correctamente.", 
+                                        'resultado' => true,
+                                        'accion'=>'Descargar csv'));
         }
         
           
@@ -133,7 +139,9 @@ class CsvController
         }
         else
         {
-            $payload = json_encode(array("mensaje" => "No se pudo crear el archivo"));
+            $payload = json_encode(array('Mensaje'=> "No se pudo crear el archivo", 
+                                        'resultado' => true,
+                                        'accion'=>'Descargar csv'));
             $response->getBody()->write($payload);
         }
         

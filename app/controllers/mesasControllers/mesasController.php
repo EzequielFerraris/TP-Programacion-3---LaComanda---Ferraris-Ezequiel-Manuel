@@ -35,7 +35,9 @@ class MesasController extends Mesa implements ABM
         $instancia->estado = $estado;
         $instancia->crear();
 
-        $payload = json_encode(array("mensaje" => "Mesa agregada con éxito"));
+        $payload = json_encode(array('Mensaje'=> "Mesa agregada con éxito", 
+                                        'resultado' => true,
+                                        'accion'=>'Agregar Mesa'));
 
         $response->getBody()->write($payload);
         return $response
@@ -54,7 +56,9 @@ class MesasController extends Mesa implements ABM
         $instancia->estado = $estado;
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Mesa actualizada con éxito."));
+        $payload = json_encode(array('Mensaje'=> "Mesa actualizada con éxito.", 
+                                        'resultado' => true,
+                                        'accion'=>'Cambiar estado Mesa'));
 
         $response->getBody()->write($payload);
         return $response
@@ -64,7 +68,10 @@ class MesasController extends Mesa implements ABM
 	public function TraerTodos($request, $response, $args)
     {
         $lista = Mesa::obtenerTodas();
-        $payload = json_encode(array("listaMesas" => $lista));
+
+        $payload = json_encode(array('Mensaje'=> $lista, 
+                                        'resultado' => true,
+                                        'accion'=>'Listar mesas'));
 
         $response->getBody()->write($payload);
         return $response
@@ -76,7 +83,24 @@ class MesasController extends Mesa implements ABM
         $codigo = $args['codigo'];
         
         $instancia = Mesa::buscar($codigo);
-        $payload = json_encode($instancia);
+
+        $payload = json_encode(array('Mensaje'=> json_encode($instancia), 
+                                    'resultado' => true,
+                                    'accion'=>'Traer una mesa'));
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function mesaMasUsada($request, $response, $args) 
+    {
+        $mesa = Mesa::mesaMasPedidos();
+        
+        $payload = json_encode(array('Mensaje'=> json_encode($mesa), 
+                                    'resultado' => true,
+                                    'accion'=>'Consulta mesa más usada'));
+
 
         $response->getBody()->write($payload);
         return $response
@@ -96,8 +120,10 @@ class MesasController extends Mesa implements ABM
                  
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Mesa modificada con exito"));
-
+        $payload = json_encode(array('Mensaje'=> "Mesa modificada con exito", 
+                                    'resultado' => true,
+                                    'accion'=>'Modificar mesa'));
+  
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -117,7 +143,9 @@ class MesasController extends Mesa implements ABM
                  
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Mesa modificada con exito"));
+        $payload = json_encode(array('Mensaje'=> "Mesa modificada con exito", 
+                                    'resultado' => true,
+                                    'accion'=>'Modificar mesa'));
 
         $response->getBody()->write($payload);
         return $response
@@ -135,12 +163,15 @@ class MesasController extends Mesa implements ABM
         $instancia->estado = "baja";
         $instancia->update();
 
-        $payload = json_encode(array("mensaje" => "Mesa dada de baja con éxito"));
+        $payload = json_encode(array('Mensaje'=> "Mesa dada de baja con éxito", 
+                                    'resultado' => true,
+                                    'accion'=>'Dar de baja mesa'));
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
+
 }
 
 ?>
