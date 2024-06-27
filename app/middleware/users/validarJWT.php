@@ -45,7 +45,7 @@ class validarJWT
         }
 
         
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response;
     }
 
 }

@@ -130,12 +130,13 @@ class CsvController
         if($csvExiste)
         {
             $response = $response
-                ->withHeader('Content-Type', 'application/octet-stream')
-                ->withHeader('Content-Disposition', 'attachment; filename=' . $fileName)
-                ->withAddedHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+                ->withHeader('Content-Type', 'text/csv')
+                ->withHeader('Content-Disposition', sprintf('attachment; filename="%s"', $fileName))
+                ->withAddedHeader('Cache-Control', 'max-age=0')
                 ->withHeader('Cache-Control', 'post-check=0, pre-check=0')
                 ->withHeader('Pragma', 'no-cache')
                 ->withBody((new Stream(fopen($csv_file, 'rb'))));
+                
         }
         else
         {
@@ -145,8 +146,7 @@ class CsvController
             $response->getBody()->write($payload);
         }
         
-        return $response
-            ->withHeader('Content-Type', 'application/json'); 
+        return $response; 
     }
 
     public static function crearDescargaCSV(string $objetoCSV, string $path)
@@ -191,7 +191,37 @@ class CsvController
         return $resultado;
     }
 
+    public static function descargarCSVGET($request, $response, $args)
+    {
+        //$parametros = $request->getParsedBody();
+        $objetoCSV = "producto"; 
+
+        $fileName = $objetoCSV . ".csv";
+        $csv_file = self::$directoryDownload . DIRECTORY_SEPARATOR . $fileName;
+
+        $csvExiste = self::crearDescargaCSV($objetoCSV, $csv_file);
+
+        if($csvExiste)
+        {
+            $response = $response
+                ->withHeader('Content-Type', 'text/csv')
+                ->withHeader('Content-Disposition', sprintf('attachment; filename="%s"', $fileName))
+                ->withAddedHeader('Cache-Control', 'max-age=0')
+                ->withHeader('Cache-Control', 'post-check=0, pre-check=0')
+                ->withHeader('Pragma', 'no-cache')
+                ->withBody((new Stream(fopen($csv_file, 'rb')))); 
+        }
+        else
+        {
+            $payload = json_encode(array('Mensaje'=> "No se pudo crear el archivo", 
+                                        'resultado' => true,
+                                        'accion'=>'Descargar csv'));
+            $response->getBody()->write($payload);
+        }
+        
+        return $response;
  
+    }
 }
 
 ?>

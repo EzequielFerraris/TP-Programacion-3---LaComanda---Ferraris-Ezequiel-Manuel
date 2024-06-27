@@ -18,7 +18,7 @@ class AuditLogMiddleware
         $paramsDevueltos = (string) $response->getBody();
         $paramsDevueltos = json_decode($paramsDevueltos);
 
-        if($paramsDevueltos->resultado)
+        if(!empty($paramsDevueltos->resultado))
         {
             $nueva_entrada = new AuditLog();
             
@@ -41,11 +41,42 @@ class AuditLogMiddleware
             $nueva_entrada->fecha = date("Y-m-d H:i:s");
             $nueva_entrada->crear();
         }
-        
-        $payload = json_encode(array('Mensaje' => $paramsDevueltos->Mensaje));
-        $response = new Response();
-        $response->getBody()->write($payload);
+        else
+        {
+            $tipoDescarga = $response->getHeader("Content-Type");
 
+            if(!empty($tipoDescarga))
+            {
+                $header = $request->getHeaderLine('Authorization');
+                $token = trim(explode("Bearer", $header)[1]);
+                $params = AutentificadorJWT::ObtenerPayLoad($token);
+
+                $nueva_entrada = new AuditLog();
+                $nueva_entrada->id_usuario = $params->id;
+                $nueva_entrada->mail = $params->mail;
+                $nueva_entrada->puesto = $params->puesto;
+
+                switch($tipoDescarga[0])
+                {
+                    case 'text/csv':
+                        $nueva_entrada->accion = "Descarga CSV";
+                    break;
+                    default:
+                        $nueva_entrada->accion = "Descarga Archivo";
+                    break;
+                }
+                $nueva_entrada->fecha = date("Y-m-d H:i:s");
+                $nueva_entrada->crear();
+                
+                return $response;
+            }
+            else
+            {
+                $payload = json_encode(array('Mensaje' => 'Acción desconocida'));
+                $response = new Response();
+                $response->getBody()->write($payload);
+            }
+        }
         return $response;
     }
 

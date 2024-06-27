@@ -69,6 +69,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/mejoresComentarios', \EncuestaController::class . ':TraerMejoresValoraciones')->add(new AuthCategoriaEncuesta())
                                                                                                         ->add(new ParamsSet(["categoria"]));
     $group->get('/listar/mesaMasUsada', \MesasController::class . ':mesaMasUsada');
+
     //PETICIOS POST
     //CARGAR UN SOCIO 
     $group->post('/cargar/socio', \socioController::class . ':CargarUno')->add(new AuthSocioABM()) 
@@ -147,6 +148,6 @@ $app->group('/clientes', function (RouteCollectorProxy $group)
     //PETICIONES POST
     $group->post('/cargarEncuesta', \EncuestaController::class . ':guardarEncuesta')->add(new AuthEncuesta())
                 ->add(new ParamsSet(["nombre_cliente", "mesa", "pedido", "cocinero_rating", "restaurante_rating", "mozo_rating", "mesa_rating", "comentario"]));
-})->add(new AuditLogMiddleware());
+});
 
 $app->run();
