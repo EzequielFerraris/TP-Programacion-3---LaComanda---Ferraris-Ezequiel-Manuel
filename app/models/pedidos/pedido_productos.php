@@ -184,4 +184,20 @@ class Pedido_productos
         
         return $result[0]["monto"];
     }
+
+    public static function obtenerEntregadosTarde()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT nombre_producto, id_pedido,
+                                                        id_trabajador, tiempo_est_minutos as minutos_estimados,
+                                                        tiempo_tardado as minutos_tardados
+                                                        FROM pedidos_productos 
+                                                        WHERE tiempo_est_minutos < tiempo_tardado");
+
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
 }

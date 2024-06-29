@@ -21,6 +21,8 @@ require_once './controllers/login/loginController.php';
 require_once './controllers/filesControllers/imagesController.php';
 require_once './controllers/encuestaController/encuestaController.php';
 require_once './controllers/filesControllers/pdfController.php';
+require_once './controllers/trabajadoresControllers/pedidos_productosController.php';
+
 
 //MIDDLEWARE CHECK TODOS LOS PARAMETROS INCLUIDOS 
 require_once './middleware/paramsSet/paramsSetCargarCSV.php';
@@ -70,7 +72,8 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/mejoresComentarios', \EncuestaController::class . ':TraerMejoresValoraciones')->add(new AuthCategoriaEncuesta())
                                                                                                         ->add(new ParamsSet(["categoria"]));
     $group->get('/listar/mesaMasUsada', \MesasController::class . ':mesaMasUsada');
-    $group->get('/listar/fueraDeTiempo', \PedidosController::class . ':fueraDeTiempo');
+    $group->get('/listar/pedidosFueraDeTiempo', \PedidosController::class . ':fueraDeTiempo');
+    $group->get('/listar/productosFueraDeTiempo', \pedidos_productosController::class . ':fueraDeTiempo');
     $group->get('/descargar/pdf', \PdfController::class . ':descargarPDF');
 
     //PETICIOS POST
