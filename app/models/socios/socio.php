@@ -92,15 +92,6 @@ class Socio
         $consulta->execute();
     }
 
-    public static function hardDelete($id)
-    {
-        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("DELETE FROM socios WHERE id = :id");
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-                
-        $consulta->execute();
-    }
-
 }
 
 ?>
