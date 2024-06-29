@@ -65,6 +65,9 @@ class AuditLogMiddleware
                     case 'text/csv':
                         $nueva_entrada->accion = "Descarga CSV";
                     break;
+                    case 'application/pdf':
+                        $nueva_entrada->accion = "Descarga PDF";
+                    break;
                     default:
                         $nueva_entrada->accion = "Descarga Archivo";
                     break;

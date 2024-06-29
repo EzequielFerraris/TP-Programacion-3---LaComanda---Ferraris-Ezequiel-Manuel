@@ -20,6 +20,7 @@ require_once './controllers/filesControllers/csvController.php';
 require_once './controllers/login/loginController.php';
 require_once './controllers/filesControllers/imagesController.php';
 require_once './controllers/encuestaController/encuestaController.php';
+require_once './controllers/filesControllers/pdfController.php';
 
 //MIDDLEWARE CHECK TODOS LOS PARAMETROS INCLUIDOS 
 require_once './middleware/paramsSet/paramsSetCargarCSV.php';
@@ -70,6 +71,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
                                                                                                         ->add(new ParamsSet(["categoria"]));
     $group->get('/listar/mesaMasUsada', \MesasController::class . ':mesaMasUsada');
     $group->get('/listar/fueraDeTiempo', \PedidosController::class . ':fueraDeTiempo');
+    $group->get('/descargar/pdf', \PdfController::class . ':descargarPDF');
 
     //PETICIOS POST
     //CARGAR UN SOCIO 
@@ -92,7 +94,7 @@ $app->group('/socios', function (RouteCollectorProxy $group)
                                                                     ->add(new ParamsSetCargarCSV());  
     //DESCARGAR CSV 
     $group->post('/descargar/csv', \CsvController::class . ':descargarCSV')->add(new AuthDescargarCSV()) 
-                                                                        ->add(new ParamsSetDescargarCSV());  
+                                                                        ->add(new ParamsSetDescargarCSV());                                              
 })->add(new AuditLogMiddleware())
 ->add(new validarJWT("socio"));                     
 
