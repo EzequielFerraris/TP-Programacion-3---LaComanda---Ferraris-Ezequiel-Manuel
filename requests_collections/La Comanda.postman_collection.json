@@ -1,0 +1,1414 @@
+{
+	"info": {
+		"_postman_id": "f40250bb-c09a-4363-9bb2-348abdbe6506",
+		"name": "La Comanda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13840858"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mail",
+							"value": "socio1@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "socio",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/login",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar socio (SOCIO)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "apellido",
+							"value": "socioIII",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "socioIII",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "socio3@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/socio",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cargar",
+						"socio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar mesa (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "777777",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "libre",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/mesa",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cargar",
+						"mesa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar un producto (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Corona",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "3000",
+							"type": "text"
+						},
+						{
+							"key": "sector",
+							"value": "choperas",
+							"type": "text"
+						},
+						{
+							"key": "hayStock",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/producto",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cargar",
+						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar trabajador (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "apellido",
+							"value": "Gimenez",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Lola",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "mozo",
+							"type": "text"
+						},
+						{
+							"key": "fechaIngreso",
+							"value": "2024-3-1",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "florG@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/trabajador",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cargar",
+						"trabajador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar csv (SOCIO)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pedido",
+							"type": "file",
+							"src": "postman-cloud:///1ef310ce-85a3-4810-8a5b-e4dcede5ecfa"
+						},
+						{
+							"key": "objeto",
+							"value": "producto",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cargar/csv",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cargar",
+						"csv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Descargar csv (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk0OTQxODcsImV4cCI6NjAwMDAwMDAxNzE5NDk0MTg3LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.Duy3IqMvvRCqCscpZqWTEWv36gNb6y6tvYvOt6FuYao",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "objeto",
+							"value": "producto",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/descargar/csv",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"descargar",
+						"csv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cerrar mesa (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "11111",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "cerrada",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/cerrarMesa",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"cerrarMesa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar socios (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/socios",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"socios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar trabajadores (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/trabajadores",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar mesas (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/mesas",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar productos por area (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/productos/barra",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"productos",
+						"barra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar tiempo estimado demora (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/demoraPedido?codigo=569aZ",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"demoraPedido"
+					],
+					"query": [
+						{
+							"key": "codigo",
+							"value": "569aZ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar mejores valoraciones (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/mejoresComentarios?categoria=mozo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"mejoresComentarios"
+					],
+					"query": [
+						{
+							"key": "categoria",
+							"value": "mozo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar mesa más usada (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzE2NjQsImV4cCI6NjAwMDAwMDAxNzE5MjcxNjY0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsInB1ZXN0byI6InNvY2lvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.UAJXTGTW8-47VI66Cep0bCSbfIsm26zp_ogxlEROq48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/mesaMasUsada",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"mesaMasUsada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Descargar PDF (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/descargar/pdf",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"descargar",
+						"pdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar pedidos fuera de tiempo (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk0OTQxODcsImV4cCI6NjAwMDAwMDAxNzE5NDk0MTg3LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.Duy3IqMvvRCqCscpZqWTEWv36gNb6y6tvYvOt6FuYao",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/pedidosFueraDeTiempo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"pedidosFueraDeTiempo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar productos fuera de tiempo (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/productosFueraDeTiempo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"productosFueraDeTiempo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar acciones por sector (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/accionesPorSector",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"accionesPorSector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar acciones por trabajador por sector (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/trabajadorSector",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"trabajadorSector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar producto de más a menos vendido (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/masAmenosVendido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"masAmenosVendido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar logins (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/loginsTrabajador?mail=socio1@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"loginsTrabajador"
+					],
+					"query": [
+						{
+							"key": "mail",
+							"value": "socio1@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar mesas por facturación (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/mesasPorFactura",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"mesasPorFactura"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar facturación mesa entre dos fechas (SOCIO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk2NjYyMzUsImV4cCI6NjAwMDAwMDAxNzE5NjY2MjM1LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjgsIm1haWwiOiJzb2NpbzFAZ21haWwuY29tIiwicHVlc3RvIjoic29jaW8iLCJhcHAiOiJMYSBDb21hbmRhIn0.g-Nww12wI5vUZOCuc9qZLTFwOSFln5yKs7nez06Tt1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/socios/listar/ingresoMesaEntreFechas?fecha1=2024-06-24&fecha2=2024-07-01",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"socios",
+						"listar",
+						"ingresoMesaEntreFechas"
+					],
+					"query": [
+						{
+							"key": "fecha1",
+							"value": "2024-06-24"
+						},
+						{
+							"key": "fecha2",
+							"value": "2024-07-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar pedido (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkxOTcyMDgsImV4cCI6MTcxOTc5NzIwOCwiYXVkIjoiZjI3NjQzYjM3M2IyMWJjMTc2OGMyNzkyZDg1ZjQ2OTQ1ODYxNzBjYyIsImlkIjoxMSwicHVlc3RvIjoibW96byIsImFwcCI6IkxhIENvbWFuZGEifQ.TC4jfqYOcmgCGpTLbq9l6x9TcB-BUljxYGm6OWfffJw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "123as",
+							"type": "text"
+						},
+						{
+							"key": "cliente",
+							"value": "Jose",
+							"type": "text"
+						},
+						{
+							"key": "mesa",
+							"value": "55555",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/cargar/pedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"cargar",
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar imagen (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkxOTcyMDgsImV4cCI6MTcxOTc5NzIwOCwiYXVkIjoiZjI3NjQzYjM3M2IyMWJjMTc2OGMyNzkyZDg1ZjQ2OTQ1ODYxNzBjYyIsImlkIjoxMSwicHVlc3RvIjoibW96byIsImFwcCI6IkxhIENvbWFuZGEifQ.TC4jfqYOcmgCGpTLbq9l6x9TcB-BUljxYGm6OWfffJw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pedido",
+							"value": "123as",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "postman-cloud:///1ef16fe0-dd9b-4350-b2d4-4230c10ec11d"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/cargar/imagen",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"cargar",
+						"imagen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambiar estado mesa (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI2MzgsImV4cCI6NjAwMDAwMDAxNzE5MjcyNjM4LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE5LCJwdWVzdG8iOiJtb3pvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.K4a6v8X6ifZ6cXO7NHGZvQtJILxbFpcIk-Gu-79eIAs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "11111",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "ocupada",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/estadoMesa",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"estadoMesa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Producto a Pedido (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI2MzgsImV4cCI6NjAwMDAwMDAxNzE5MjcyNjM4LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE5LCJwdWVzdG8iOiJtb3pvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.K4a6v8X6ifZ6cXO7NHGZvQtJILxbFpcIk-Gu-79eIAs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pedido",
+							"value": "569aZ",
+							"type": "text"
+						},
+						{
+							"key": "producto",
+							"value": "11",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/cargar/pedidoProducto",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"cargar",
+						"pedidoProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Entregar pedido (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI2MzgsImV4cCI6NjAwMDAwMDAxNzE5MjcyNjM4LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE5LCJwdWVzdG8iOiJtb3pvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.K4a6v8X6ifZ6cXO7NHGZvQtJILxbFpcIk-Gu-79eIAs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "569aZ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/entregarPedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"entregarPedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cobrar pedido (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI2MzgsImV4cCI6NjAwMDAwMDAxNzE5MjcyNjM4LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE5LCJwdWVzdG8iOiJtb3pvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.K4a6v8X6ifZ6cXO7NHGZvQtJILxbFpcIk-Gu-79eIAs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "569aZ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/cobrarPedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"cobrarPedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener pedidos por ESTADO (MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI2MzgsImV4cCI6NjAwMDAwMDAxNzE5MjcyNjM4LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE5LCJwdWVzdG8iOiJtb3pvIiwiYXBwIjoiTGEgQ29tYW5kYSJ9.K4a6v8X6ifZ6cXO7NHGZvQtJILxbFpcIk-Gu-79eIAs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/mozo/listar/pedidos?estado=Listo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"mozo",
+						"listar",
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Listo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tomar producto pendiente (TRABAJADOR NO MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzI3MDQsImV4cCI6NjAwMDAwMDAxNzE5MjcyNzA0LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE3LCJwdWVzdG8iOiJjb2NpbmVybyIsImFwcCI6IkxhIENvbWFuZGEifQ.oFEPUw7XpFKKapv9N6N_iqNmpv3-QIB4Ti-pH-G8DOg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_pendiente",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "tiempoEstimado",
+							"value": "20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/gestionPedido/tomarProducto",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"gestionPedido",
+						"tomarProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Marcar producto como Listo (TRABAJADOR NO MOZO)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTkyNzUzNjYsImV4cCI6NjAwMDAwMDAxNzE5Mjc1MzY2LCJhdWQiOiJmMjc2NDNiMzczYjIxYmMxNzY4YzI3OTJkODVmNDY5NDU4NjE3MGNjIiwiaWQiOjE1LCJwdWVzdG8iOiJiYXJ0ZW5kZXIiLCJhcHAiOiJMYSBDb21hbmRhIn0.0gNXo0DZeS2uok6VyIANvEXiAjEORjoHXe1AvQ06nmQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_pendiente",
+							"value": "11",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/gestionPedido/marcarListo",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"gestionPedido",
+						"marcarListo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos pendientes (TRABAJADOR NO MOZO)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/gestionPedido",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"gestionPedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar demora (CLIENTE)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lacomanda/app/clientes/demoraPedido?codigo=569aZ&mesa=11111",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"clientes",
+						"demoraPedido"
+					],
+					"query": [
+						{
+							"key": "codigo",
+							"value": "569aZ"
+						},
+						{
+							"key": "mesa",
+							"value": "11111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar encuesta opinión (CLIENTE)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre_cliente",
+							"value": "Flor",
+							"type": "text"
+						},
+						{
+							"key": "mesa",
+							"value": "11111",
+							"type": "text"
+						},
+						{
+							"key": "pedido",
+							"value": "569aZ",
+							"type": "text"
+						},
+						{
+							"key": "cocinero_rating",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "restaurante_rating",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "mozo_rating",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "mesa_rating",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "comentario",
+							"value": "\"Comida excelente. Mozo con malos modales.\"",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lacomanda/app/clientes/cargarEncuesta",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lacomanda",
+						"app",
+						"clientes",
+						"cargarEncuesta"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
