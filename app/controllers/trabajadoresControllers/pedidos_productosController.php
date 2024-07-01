@@ -29,7 +29,53 @@ class pedidos_productosController
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
+
+    public function MasVendidoAMenos($request, $response, $args)
+    {
+        
+        $lista = pedido_productos::obtenerMasVendidoAMenos(); 
+
+        if(empty($lista))
+        {
+            $payload = json_encode(array('Mensaje'=> 'No se registran productos vendidos.', 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos más a menos vendidos'));
+        }
+        else
+        {
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos más a menos vendidos'));
+        }
+        
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+   
+    public function mesaEntreFechas($request, $response, $args)
+    {
+        $params = $request->getQueryParams();
+
+        $lista = Pedido::facturacionEntreDosFechasMesa($params['fecha1'], $params['fecha2']); 
+
+        if(empty($lista))
+        {
+            $payload = json_encode(array('Mensaje'=> 'No se registran ventas entre esas fechas.', 
+                                    'resultado' => true,
+                                    'accion'=>'Listar facturación mesa entre dos fechas'));
+        }
+        else
+        {
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar facturación mesa entre dos fechas'));
+        }
+        
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
 }
-
-
 ?>

@@ -191,6 +191,20 @@ class PedidosController extends Pedido implements ABM
           ->withHeader('Content-Type', 'application/json');
 
     }
+
+    public static function listarMesasPorFactura($request, $response, $args)
+    {
+        $mesas = Pedido::obtenerMesasPorFactura();
+
+        $payload = json_encode(array('Mensaje'=> $mesas, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar mesas por facturación'));
+                                    
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+
+    }
 }
 
 ?>

@@ -100,6 +100,35 @@ class Pedido
         return $consulta->fetchObject('Pedido');
     }
 
+    public static function obtenerMesasPorFactura()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT mesa, codigo, monto, entrega 
+                                                        FROM pedidos
+                                                        ORDER BY monto
+                                                        ASC");
+
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function facturacionEntreDosFechasMesa($fecha1, $fecha2)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT mesa, SUM(monto) as facturacion 
+                                                        FROM pedidos
+                                                        WHERE alta >= :fecha1 AND alta <= :fecha2
+                                                        GROUP BY mesa");
+
+        $consulta->bindValue(':fecha1', $fecha1, PDO::PARAM_STR);
+        $consulta->bindValue(':fecha2', $fecha2, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 }
 

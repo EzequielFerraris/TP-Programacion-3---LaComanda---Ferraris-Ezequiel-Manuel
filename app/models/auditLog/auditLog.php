@@ -61,30 +61,44 @@ class AuditLog
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'AuditLog');
     }
-/*
-    
-    public function update()
-    {
-        $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDato->RetornarConsulta("UPDATE encuesta SET nombre_cliente = :nombre_cliente, mesa = :mesa, 
-                                                    pedido = :pedido, cocinero_rating = :cocinero_rating, 
-                                                    restaurante_rating = :restaurante_rating, mozo_rating = :mozo_rating, 
-                                                    mesa_rating = :mesa_rating, comentario = :comentario, fecha = :fecha
-                                                    WHERE id = :id");
 
-        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT); 
-        $consulta->bindValue(':nombre_cliente', $this->nombre_cliente, PDO::PARAM_STR);
-        $consulta->bindValue(':mesa', $this->mesa, PDO::PARAM_STR);
-        $consulta->bindValue(':pedido', $this->pedido, PDO::PARAM_STR);
-        $consulta->bindValue(':cocinero_rating', $this->cocinero_rating, PDO::PARAM_INT);
-        $consulta->bindValue(':restaurante_rating', $this->restaurante_rating, PDO::PARAM_INT);
-        $consulta->bindValue(':mozo_rating', $this->mozo_rating, PDO::PARAM_INT);
-        $consulta->bindValue(':mesa_rating', $this->mesa_rating, PDO::PARAM_INT);
-        $consulta->bindValue(':comentario', $this->comentario, PDO::PARAM_STR);
-        $consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);                                              
-        
+    public static function obtenerPorSector()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT puesto, COUNT(puesto) as acciones FROM auditlog 
+                                                        GROUP BY puesto");
+
         $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
-        */
+
+    public static function obtenerPorTrabajador()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT mail, puesto, COUNT(accion) as acciones FROM auditlog 
+                                                        GROUP BY mail");
+
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function obtenerLoginsPorTrabajador($mail)
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT mail, puesto, accion, fecha FROM auditlog 
+                                                        WHERE mail = :mail AND accion = :accion ");
+
+        $consulta->bindValue(':accion', 'Login exitoso', PDO::PARAM_STR);
+        $consulta->bindValue(':mail', $mail, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

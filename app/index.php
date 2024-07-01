@@ -22,6 +22,7 @@ require_once './controllers/filesControllers/imagesController.php';
 require_once './controllers/encuestaController/encuestaController.php';
 require_once './controllers/filesControllers/pdfController.php';
 require_once './controllers/trabajadoresControllers/pedidos_productosController.php';
+require_once './controllers/auditControllers/auditController.php';
 
 
 //MIDDLEWARE CHECK TODOS LOS PARAMETROS INCLUIDOS 
@@ -75,6 +76,12 @@ $app->group('/socios', function (RouteCollectorProxy $group)
     $group->get('/listar/pedidosFueraDeTiempo', \PedidosController::class . ':fueraDeTiempo');
     $group->get('/listar/productosFueraDeTiempo', \pedidos_productosController::class . ':fueraDeTiempo');
     $group->get('/descargar/pdf', \PdfController::class . ':descargarPDF');
+    $group->get('/listar/accionesPorSector', \AuditController::class . ':operacionesPorSector');
+    $group->get('/listar/trabajadorSector', \AuditController::class . ':operacionesPorTrabajadorSector');
+    $group->get('/listar/masAmenosVendido', \pedidos_productosController::class . ':MasVendidoAMenos');
+    $group->get('/listar/loginsTrabajador', \AuditController::class . ':ingresosPorDiaTrabajador')->add(new ParamsSet(["mail"]));
+    $group->get('/listar/mesasPorFactura', \pedidosController::class . ':listarMesasPorFactura');
+    $group->get('/listar/ingresoMesaEntreFechas', \pedidos_productosController::class . ':mesaEntreFechas')->add(new ParamsSet(["fecha1", "fecha2"]));
 
     //PETICIOS POST
     //CARGAR UN SOCIO 

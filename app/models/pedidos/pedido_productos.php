@@ -200,4 +200,20 @@ class Pedido_productos
         
         return $result;
     }
+
+    public static function obtenerMasVendidoAMenos()
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT nombre_producto, COUNT(nombre_producto) as cantidad
+                                                        FROM pedidos_productos 
+                                                        GROUP BY nombre_producto
+                                                        ORDER BY cantidad
+                                                        DESC");
+
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
 }
