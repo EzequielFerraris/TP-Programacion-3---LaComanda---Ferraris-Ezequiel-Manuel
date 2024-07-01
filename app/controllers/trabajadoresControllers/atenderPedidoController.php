@@ -34,15 +34,15 @@ class atenderPedidoController
 
         if(isset($sector)){$lista = Pedido_productos::obtenerPendientes($sector);} 
 
-        if(!$lista === true)
+        if($lista)
         {
-            $payload = json_encode(array('Mensaje'=> 'No se registran productos pendientes.', 
+            $payload = json_encode(array('Mensaje'=> $lista, 
                                     'resultado' => true,
                                     'accion'=>'Listar productos pendientes'));
         }
         else
         {
-            $payload = json_encode(array('Mensaje'=> $lista, 
+            $payload = json_encode(array('Mensaje'=> 'No se registran productos pendientes.', 
                                     'resultado' => true,
                                     'accion'=>'Listar productos pendientes'));
         }
@@ -52,6 +52,50 @@ class atenderPedidoController
           ->withHeader('Content-Type', 'application/json');
     }
 
+    public function TraerEnPreparacion($request, $response, $args)
+    {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+        $puesto = AutentificadorJWT::ObtenerPuesto($token);
+
+        switch($puesto)
+        {
+            case "bartender":
+                $sector = "barra";
+            break;
+            case "cervecero":
+                $sector = "choperas";
+            break;
+            case "cocinero":
+                $sector = "cocina";
+            break;
+            case "cocineroCandybar":
+                $sector = "candybar";
+            break;
+        }
+        
+        $lista = false;
+
+        if(isset($sector)){$lista = Pedido_productos::obtenerEnPreparacion($sector);} 
+
+        if($lista)
+        {
+            $payload = json_encode(array('Mensaje'=> $lista, 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos en preparación'));
+        }
+        else
+        {
+            $payload = json_encode(array('Mensaje'=> 'No se registran productos en preparación.', 
+                                    'resultado' => true,
+                                    'accion'=>'Listar productos en preparación'));
+        }
+        
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
     public function TomarProductoPendiente($request, $response, $args)
     {
         $params = $request->getParsedBody();

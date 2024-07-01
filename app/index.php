@@ -131,7 +131,7 @@ $app->group('/mozo', function (RouteCollectorProxy $group)
     $group->post('/cargar/imagen', \ImagesController::class . ':guardarImagen')->add(new AuthCargarImagen())
                                                                             ->add(new ParamsSetCargarImagen());                                                                       
     //CARGAR UN PRODUCTO A UN PEDIDO                                                                     
-    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new ParamsSet(["codigo", "estado"]));
+    $group->post('/entregarPedido', \mozosController::class . ':MarcarPedidoEntregado')->add(new ParamsSet(["codigo"]));
     //COBRAR UN PEDIDO 
     $group->post('/cobrarPedido', \mozosController::class . ':CobrarPedido')->add(new ParamsSet(["codigo"]));
 })->add(new AuditLogMiddleware())
@@ -143,6 +143,7 @@ $app->group('/gestionPedido', function (RouteCollectorProxy $group)
     //PETICIONES GET
     //LISTA PRODUCTOS DE PEDIDOS PENDIENTES DEL AREA
     $group->get('/pendientes', \atenderPedidoController::class . ':TraerPendientes');
+    $group->get('/enPreparacion', \atenderPedidoController::class . ':TraerEnPreparacion');
     //PETICIONES POST
     //TOMAR PRODUCTO DE PEDIDO PARA COMPLETAR
     $group->post('/tomarProducto', \atenderPedidoController::class . ':TomarProductoPendiente')->add(new ParamsSet(["id_pendiente", "tiempoEstimado"])); 

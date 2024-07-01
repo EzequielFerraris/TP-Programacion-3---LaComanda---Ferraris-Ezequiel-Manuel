@@ -66,6 +66,20 @@ class Pedido_productos
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function obtenerEnPreparacion($sector) : mixed
+    {
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT pp.id, pp.id_pedido, pr.nombre, pp.estado FROM pedidos_productos 
+                                                        as pp INNER JOIN productos as pr
+                                                        ON pp.id_producto = pr.id
+                                                        WHERE pr.sector = :sector AND pp.estado = 'En preparación'");
+
+        $consulta->bindValue(':sector', $sector, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function update()
     {
         $objAccesoDato = AccesoDatos::dameUnObjetoAcceso();

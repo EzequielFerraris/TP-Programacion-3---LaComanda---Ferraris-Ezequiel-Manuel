@@ -18,7 +18,7 @@ class AuthMesaABM
         $codigo = $parametros['codigo'];
         $estado = $parametros['estado'];
 
-        if(Validaciones::es_alfanumerico($codigo) && Validaciones::es_mesa_estado($estado))
+        if(Validaciones::es_alfanumerico($codigo) && Validaciones::es_comentario_valido($estado))
         {
             if($estado == "cerrada" && $puesto == "mozo")
             {
