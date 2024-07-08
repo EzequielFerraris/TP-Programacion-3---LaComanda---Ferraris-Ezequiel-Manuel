@@ -34,7 +34,8 @@ class validarJWT
             }
             else
             {
-                $payload = json_encode(array('mensaje' => "No cuenta con los permisos necesarios."));
+                $payload = json_encode(array('mensaje' => "No cuenta con los permisos necesarios.",
+                                            'resultado' => false));
                 $response->getBody()->write($payload);
             }
         } 

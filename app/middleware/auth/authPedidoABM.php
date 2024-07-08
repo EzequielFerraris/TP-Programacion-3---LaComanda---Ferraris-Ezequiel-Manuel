@@ -48,7 +48,8 @@ class AuthPedidoABM
         if(!$valido)
         {
             $response = new Response();
-            $payload = json_encode(array('mensaje' => "El parámentro " . $parametroInvalido . " es inválido."));
+            $payload = json_encode(array('mensaje' => "El parámentro " . $parametroInvalido . " es inválido.",
+                                            'resultado' => false));
             $response->getBody()->write($payload);
         }
 

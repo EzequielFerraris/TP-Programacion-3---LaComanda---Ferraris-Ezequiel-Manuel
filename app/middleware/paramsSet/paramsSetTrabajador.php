@@ -19,7 +19,8 @@ class ParamsSetTrabajador
         else 
         {
             $response = new Response();
-            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros no ha sido enviado.'));
+            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros no ha sido enviado.',
+                                            'resultado' => false));
             $response->getBody()->write($payload);
         }
 

@@ -23,7 +23,8 @@ class AuthMesaABM
             if($estado == "cerrada" && $puesto == "mozo")
             {
                 $response = new Response();
-                $payload = json_encode(array('mensaje' => 'Los mozos no pueden cerrar mesas.'));
+                $payload = json_encode(array('mensaje' => 'Los mozos no pueden cerrar mesas.',
+                                                'resultado' => false));
                 $response->getBody()->write($payload);
             }
             else
@@ -34,7 +35,8 @@ class AuthMesaABM
         else 
         {
             $response = new Response();
-            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros es inválido.'));
+            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros es inválido.',
+                                            'resultado' => false));
             $response->getBody()->write($payload);
         }
 

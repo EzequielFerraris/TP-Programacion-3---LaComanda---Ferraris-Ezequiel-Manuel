@@ -20,7 +20,15 @@ class LoginController
         {
             case "socio":
                 $socio = Socio::buscarPorMail($mail);
-                if ($socio->login($password)) {$validez = true; $idLog = $socio->id;}
+                if(!empty($socio)) 
+                {
+                    if ($socio->login($password)) {$validez = true; $idLog = $socio->id;}
+                }
+                else
+                {
+                    $validez = false;
+                }
+                
             break;
             case "cervecero":
             case "bartender":
@@ -28,7 +36,14 @@ class LoginController
             case "cocineroCandybar":
             case "mozo":
                 $empleado = Trabajador::buscarPorMail($mail);
-                if ($empleado->login($password)) {$validez = true; $idLog = $empleado->id;}
+                if(!empty($empleado)) 
+                {
+                    if ($empleado->login($password)) {$validez = true; $idLog = $empleado->id;}
+                }
+                else
+                {
+                    $validez = false;
+                }
             break;
         }
 
@@ -44,13 +59,14 @@ class LoginController
             }
             catch(Exception $e)
             {
-                $payload = json_encode(array('Mensaje' => $e->getMessage()));
+                $payload = json_encode(array('Mensaje' => $e->getMessage(), 'resultado' => false));
             }
 
         }
         else
         {
-            $payload = json_encode(array('Mensaje' => "Alguno de los parámetros es incorrecto."));
+            $payload = json_encode(array('Mensaje' => "Alguno de los parámetros es incorrecto.",
+                                        'resultado' => false));
         }
         
         $response->getBody()->write($payload);

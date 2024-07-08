@@ -18,32 +18,36 @@ class AuditLogMiddleware
         $paramsDevueltos = (string) $response->getBody();
         $paramsDevueltos = json_decode($paramsDevueltos);
 
-        if(!empty($paramsDevueltos->resultado))
+        if(!empty($paramsDevueltos->resultado) || isset($paramsDevueltos->resultado))
         {
-            $nueva_entrada = new AuditLog();
-            
-            if(isset($paramsDevueltos->jwt))
+            if($paramsDevueltos->resultado)
             {
-                $token = $paramsDevueltos->jwt;
-            }
-            else
-            {
-                $header = $request->getHeaderLine('Authorization');
-                $token = trim(explode("Bearer", $header)[1]);
-            }
+                $nueva_entrada = new AuditLog();
             
-            $params = AutentificadorJWT::ObtenerPayLoad($token);
+                if(isset($paramsDevueltos->jwt))
+                {
+                    $token = $paramsDevueltos->jwt;
+                }
+                else
+                {
+                    $header = $request->getHeaderLine('Authorization');
+                    $token = trim(explode("Bearer", $header)[1]);
+                }
+                
+                $params = AutentificadorJWT::ObtenerPayLoad($token);
 
-            $nueva_entrada->id_usuario = $params->id;
-            $nueva_entrada->mail = $params->mail;
-            $nueva_entrada->puesto = $params->puesto;
-            $nueva_entrada->accion = $paramsDevueltos->accion;
-            $nueva_entrada->fecha = date("Y-m-d H:i:s");
-            $nueva_entrada->crear();
+                $nueva_entrada->id_usuario = $params->id;
+                $nueva_entrada->mail = $params->mail;
+                $nueva_entrada->puesto = $params->puesto;
+                $nueva_entrada->accion = $paramsDevueltos->accion;
+                $nueva_entrada->fecha = date("Y-m-d H:i:s");
+                $nueva_entrada->crear();
 
-            $payload = json_encode(array('Mensaje' => $paramsDevueltos->Mensaje));
-            $response = new Response();
-            $response->getBody()->write($payload);
+                $payload = json_encode(array('Mensaje' => $paramsDevueltos->Mensaje));
+                $response = new Response();
+                $response->getBody()->write($payload);
+            }
+
         }
         else
         {

@@ -24,7 +24,8 @@ class AuthSocioABM
         else 
         {
             $response = new Response();
-            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros es inválido.'));
+            $payload = json_encode(array('mensaje' => 'Uno o más de los parámetros es inválido.',
+                                            'resultado' => false));
             $response->getBody()->write($payload);
         }
 
